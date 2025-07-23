@@ -1,9 +1,27 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# Arquivos e diretórios gerados pelo Maven
+/target/
+pom.xml.tag
+pom.xml.next
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.stacktrace
+release.properties
+dependency-reduced-pom.xml
+build/
+dist/
 
+
+/src/main/resources/application.properties 
+# Ignora o arquivo application.properties
+
+
+# Arquivos e diretórios do Maven Wrapper
+.mvn/
+mvnw
+mvnw.cmd
+HELP.md # Se quiser ignorar o arquivo de ajuda também (geralmente gerado)
+
+# IDE specific files
 ### STS ###
 .apt_generated
 .classpath
@@ -25,9 +43,38 @@ target/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# build/ # Já ignorado pelo /target/
+# !**/src/main/**/build/ # Estas linhas são para exceções, geralmente não necessárias aqui
+# !**/src/test/**/build/
 
 ### VS Code ###
 .vscode/
+
+# Logs
+*.log
+logs/
+
+# Arquivos temporários do sistema operacional
+.DS_Store
+Thumbs.db
+Desktop.ini
+~$*
+*.tmp
+
+# Arquivos de package (jars, wars, ears, etc.)
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Dados de banco de dados locais ou arquivos sensíveis (se for o caso)
+*.db
+*.sqlite
+*.mv.db
+*.trace.db
+# Arquivos de backup de propriedades/XML, se gerados e forem locais
+# *.properties.bak
+# *.xml.bak
+# /data/ # Se houver uma pasta 'data' para BDs embutidos
