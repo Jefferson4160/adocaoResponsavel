@@ -1,80 +1,40 @@
-# Arquivos e diretórios gerados pelo Maven
+# Arquivos de Build do Maven/Gradle (geralmente gerados por qualquer IDE)
 /target/
-pom.xml.tag
-pom.xml.next
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.stacktrace
-release.properties
-dependency-reduced-pom.xml
-build/
-dist/
+/build/
 
-
-/src/main/resources/application.properties 
-# Ignora o arquivo application.properties
-
-
-# Arquivos e diretórios do Maven Wrapper
-.mvn/
-mvnw
-mvnw.cmd
-HELP.md # Se quiser ignorar o arquivo de ajuda também (geralmente gerado)
-
-# IDE specific files
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
+# Arquivos de IDE (NetBeans)
+# Diretorio de cache do NetBeans para o projeto
 /nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-# build/ # Já ignorado pelo /target/
-# !**/src/main/**/build/ # Estas linhas são para exceções, geralmente não necessárias aqui
-# !**/src/test/**/build/
+# Configuracoes de projeto do NetBeans para usuario local
+/nbproject/project.properties
+/nb-configuration.xml
 
-### VS Code ###
-.vscode/
-
-# Logs
+# Arquivos de log
 *.log
-logs/
 
-# Arquivos temporários do sistema operacional
-.DS_Store
-Thumbs.db
-Desktop.ini
-~$*
-*.tmp
+# Arquivos de classes Java compiladas
+*.class
 
-# Arquivos de package (jars, wars, ears, etc.)
+# Arquivos de pacotes Java
 *.jar
 *.war
 *.ear
 *.zip
-*.tar.gz
 *.rar
 
-# Dados de banco de dados locais ou arquivos sensíveis (se for o caso)
-*.db
-*.sqlite
-*.mv.db
-*.trace.db
-# Arquivos de backup de propriedades/XML, se gerados e forem locais
-# *.properties.bak
-# *.xml.bak
-# /data/ # Se houver uma pasta 'data' para BDs embutidos
+# Arquivos de configuracao de ambiente local (senhas, etc.)
+# Se você tiver arquivos de configuração com informações sensíveis,
+# adicione-os aqui. Ex:
+# application-local.properties
+# application-dev.yml
+
+# Arquivos de sistema operacional
+.DS_Store # macOS
+Thumbs.db # Windows
+.idea/ # Se usar IntelliJ IDEA em algum momento
+.vscode/ # Se usar VS Code em algum momento
+
+# Arquivos temporarios/gerados automaticamente
+*~
+*.bak
+*.swp
