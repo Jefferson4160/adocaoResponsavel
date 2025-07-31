@@ -33,7 +33,7 @@ public class Main extends javax.swing.JFrame {
                 btnInqueActionPerformed(evt);
             }
         });
-        btnLuan.addActionListener(new java.awt.event.ActionListener() {
+        btnLarTemporarioLuan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLuanActionPerformed(evt);
             }
@@ -94,7 +94,7 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         btnInque = new javax.swing.JButton();
-        btnLuan = new javax.swing.JButton();
+        btnLarTemporarioLuan = new javax.swing.JButton();
         btnLuis = new javax.swing.JButton();
         btnRodrigo = new javax.swing.JButton();
         btnJefferson = new javax.swing.JButton();
@@ -103,7 +103,12 @@ public class Main extends javax.swing.JFrame {
 
         btnInque.setText("Inque");
 
-        btnLuan.setText("Luan");
+        btnLarTemporarioLuan.setText("Lar Temporario (Luan)");
+        btnLarTemporarioLuan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLarTemporarioLuanActionPerformed(evt);
+            }
+        });
 
         btnLuis.setText("Luis");
 
@@ -116,40 +121,44 @@ public class Main extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnLuis, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRodrigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnJefferson, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(btnLuan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnInque, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addGap(75, 75, 75)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnInque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLarTemporarioLuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLuis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRodrigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnJefferson, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(62, 62, 62)
                 .addComponent(btnInque)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLuan)
+                .addComponent(btnLarTemporarioLuan)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLuis)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRodrigo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnJefferson)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLarTemporarioLuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLarTemporarioLuanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLarTemporarioLuanActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInque;
     private javax.swing.JButton btnJefferson;
-    private javax.swing.JButton btnLuan;
+    private javax.swing.JButton btnLarTemporarioLuan;
     private javax.swing.JButton btnLuis;
     private javax.swing.JButton btnRodrigo;
     // End of variables declaration//GEN-END:variables

@@ -24,32 +24,32 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btnInque" max="32767" attributes="0"/>
+                  <Component id="btnLarTemporarioLuan" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnLuis" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnRodrigo" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnJefferson" alignment="0" pref="100" max="32767" attributes="0"/>
-                  <Component id="btnLuan" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnInque" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnJefferson" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="269" max="32767" attributes="0"/>
+              <EmptySpace pref="75" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
               <Component id="btnInque" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnLuan" min="-2" max="-2" attributes="0"/>
+              <Component id="btnLarTemporarioLuan" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnLuis" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnRodrigo" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnJefferson" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="107" max="32767" attributes="0"/>
+              <EmptySpace pref="62" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,10 +60,13 @@
         <Property name="text" type="java.lang.String" value="Inque"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnLuan">
+    <Component class="javax.swing.JButton" name="btnLarTemporarioLuan">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Luan"/>
+        <Property name="text" type="java.lang.String" value="Lar Temporario (Luan)"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLarTemporarioLuanActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnLuis">
       <Properties>
