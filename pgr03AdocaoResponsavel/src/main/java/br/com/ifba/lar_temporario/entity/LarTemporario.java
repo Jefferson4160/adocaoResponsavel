@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 
 /**
  *
- * @author a1591
+ * @author Luan Alves
  */
 @Entity
 @Table(name = "tb_lar_temporario")

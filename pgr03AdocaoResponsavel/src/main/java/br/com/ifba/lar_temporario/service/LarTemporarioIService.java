@@ -7,7 +7,7 @@ import br.com.ifba.lar_temporario.entity.LarTemporario;
 import java.util.List;
 /**
  *
- * @author a1591
+ * @author Luan Alves
  */
 public interface LarTemporarioIService {
     LarTemporario save(LarTemporario lar);

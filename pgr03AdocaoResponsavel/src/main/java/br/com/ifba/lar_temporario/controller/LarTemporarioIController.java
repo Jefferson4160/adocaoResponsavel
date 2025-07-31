@@ -4,12 +4,23 @@
  */
 package br.com.ifba.lar_temporario.controller;
 
+import br.com.ifba.lar_temporario.entity.LarTemporario;
+import java.util.List;
+
 /**
- *
- * @author a1591
+ * Interface responsável pelas operações de controle de Lar Temporário.
+ * 
+ * @author Luan Alves
  */
 public interface LarTemporarioIController {
-    
-    
-    
+
+    List<LarTemporario> findAll() throws RuntimeException;
+
+    LarTemporario save(LarTemporario lar) throws RuntimeException;
+
+    LarTemporario update(LarTemporario lar) throws RuntimeException;
+
+    void delete(LarTemporario lar) throws RuntimeException;
+
+    LarTemporario findById(Long id) throws RuntimeException;
 }
