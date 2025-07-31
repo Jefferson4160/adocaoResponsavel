@@ -4,10 +4,13 @@
  */
 package br.com.ifba.lar_temporario.repository;
 
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import br.com.ifba.lar_temporario.entity.LarTemporario;
 /**
  *
  * @author a1591
  */
-public interface LarTemporarioRepository {
+public interface LarTemporarioRepository extends JpaRepository<LarTemporario, Long>{
     
 }
