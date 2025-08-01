@@ -11,7 +11,7 @@
 	<groupId>br.com.ifba</groupId>
 	<artifactId>pgr03AdocaoResponsavel</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>pgr03AdocaoResponsavel</name>
+	<name>prg03adocaoresponsavel</name> 
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -52,12 +52,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 	 <dependency>
 	  <groupId>javax.annotation</groupId>
 	  <artifactId>jsr250-api</artifactId>
 	  <version>1.0</version>
 	  <type>jar</type>
 	 </dependency>
+
 	</dependencies>
 
 	<build>
@@ -92,3 +94,4 @@
 	</build>
 
 </project>
+
