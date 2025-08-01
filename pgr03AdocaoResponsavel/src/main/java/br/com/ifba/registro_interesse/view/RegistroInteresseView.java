@@ -5,14 +5,22 @@
 
 package br.com.ifba.registro_interesse.view;
 
+import br.com.ftba.registro_interesse.controller.RegistroInteresseIController;
+import org.springframework.context.ConfigurableApplicationContext;
+
+import javax.swing.*;
+import java.awt.*;
+
 /**
  *
  * @author inque
  */
 public class RegistroInteresseView extends javax.swing.JFrame {
+    
+    private final RegistroInteresseIController registroInteresseController;
 
     /** Creates new form RegistroInteresseView */
-    public RegistroInteresseView() {
+    public RegistroInteresseView(ConfigurableApplicationContext context) {
         initComponents();
     }
 
