@@ -4,6 +4,7 @@
  */
 package br.com.ifba.app.view;
 
+import br.com.ifba.lar_temporario.view.LarTemporarioView;
 import jakarta.annotation.PostConstruct;
 import javax.swing.JOptionPane;
 import org.springframework.stereotype.Component;
@@ -35,7 +36,8 @@ public class Main extends javax.swing.JFrame {
         });
         btnLarTemporarioLuan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLuanActionPerformed(evt);
+                LarTemporarioView larTemporarioView = new LarTemporarioView();
+                larTemporarioView.setVisible(true);
             }
         });
         btnLuis.addActionListener(new java.awt.event.ActionListener() {

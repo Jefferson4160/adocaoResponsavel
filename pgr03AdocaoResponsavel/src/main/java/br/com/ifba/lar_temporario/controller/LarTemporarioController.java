@@ -20,37 +20,37 @@ import org.springframework.stereotype.Controller;
 public class LarTemporarioController implements LarTemporarioIController {
 
     @Autowired
-    private LarTemporarioIService larTemporarioIService;
+    private LarTemporarioIService larTemporarioService;
     
     private static final Logger log = LoggerFactory.getLogger(LarTemporarioController.class);
 
     @Override
     public LarTemporario save(LarTemporario lar) {
         log.info("Cadastrando novo Lar Temporário");
-        return larTemporarioIService.save(lar);
+        return larTemporarioService.save(lar);
     }
 
     @Override
     public LarTemporario update(LarTemporario lar) {
         log.info("Atualizando Lar Temporário");
-        return larTemporarioIService.update(lar);
+        return larTemporarioService.update(lar);
     }
 
     @Override
     public void delete(LarTemporario lar) {
         log.info("Deletando Lar Temporário");
-        larTemporarioIService.delete(lar);
+        larTemporarioService.delete(lar);
     }
 
     @Override
     public List<LarTemporario> findAll() {
         log.info("Buscando todos os Lares Temporários");
-        return larTemporarioIService.findAll();
+        return larTemporarioService.findAll();
     }
 
     @Override
     public LarTemporario findById(Long id) {
         log.info("Buscando Lar Temporário por ID");
-        return larTemporarioIService.findById(id);
+        return larTemporarioService.findById(id);
     } 
 }
