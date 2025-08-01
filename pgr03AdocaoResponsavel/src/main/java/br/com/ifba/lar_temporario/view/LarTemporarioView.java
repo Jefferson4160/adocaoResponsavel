@@ -337,7 +337,7 @@ public final class LarTemporarioView extends javax.swing.JFrame {
 
     private void jTextFildBuscarLarTemporarioPorIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFildBuscarLarTemporarioPorIDActionPerformed
         // TODO add your handling code here:
-        /*
+        
          String textoBusca = jTextFildBuscarLarTemporarioPorID.getText().trim();
 
         if (textoBusca.isEmpty()) {
@@ -365,9 +365,11 @@ public final class LarTemporarioView extends javax.swing.JFrame {
             if (larTemporario != null) {
                 Object[] linha = {
                     larTemporario.getId(),
-                    larTemporario.getNome(),
-                    larTemporario.getCodigoLarTemporario(),
-                    larTemporario.isAtivo()
+                    larTemporario.getDataCadastro(),
+                    larTemporario.isDisponivel(),
+                    larTemporario.getObservacoes(),
+                    larTemporario.getQuantidadeMaxAnimais(),
+                    larTemporario.getPessoa().getId()
                 };
                 model.addRow(linha);
             } else {
@@ -378,7 +380,7 @@ public final class LarTemporarioView extends javax.swing.JFrame {
         } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(this, "Erro ao buscar larTemporario: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-        */
+        
     }//GEN-LAST:event_jTextFildBuscarLarTemporarioPorIDActionPerformed
 
     /**
