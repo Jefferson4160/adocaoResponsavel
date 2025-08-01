@@ -4,6 +4,7 @@
  */
 package br.com.ifba.app.view;
 
+import br.com.ifba.animal.view.AnimalView;
 import br.com.ifba.lar_temporario.view.LarTemporarioView;
 import br.com.ifba.tela.util.ApplicationContextProvider;
 import jakarta.annotation.PostConstruct;
@@ -85,10 +86,6 @@ public class Main extends javax.swing.JFrame {
         
     }
 
-    private void btnRodrigoActionPerformed(java.awt.event.ActionEvent evt) {
-        JOptionPane.showMessageDialog(this, "Funcionalidade do Rodrigo");
-        
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -118,7 +115,12 @@ public class Main extends javax.swing.JFrame {
 
         btnLuis.setText("Luis");
 
-        btnRodrigo.setText("Rodrigo");
+        btnRodrigo.setText("Gerenciamento Animais (Rodrigo)");
+        btnRodrigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRodrigoActionPerformed(evt);
+            }
+        });
 
         btnJefferson.setText("Jefferson");
 
@@ -158,6 +160,17 @@ public class Main extends javax.swing.JFrame {
     private void btnLarTemporarioLuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLarTemporarioLuanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLarTemporarioLuanActionPerformed
+
+    private void btnRodrigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRodrigoActionPerformed
+           
+        AnimalView tela = ApplicationContextProvider
+            .getApplicationContext()
+            .getBean(AnimalView.class);
+        
+        tela.setLocationRelativeTo(null);
+        tela.setVisible(true);
+        
+    }//GEN-LAST:event_btnRodrigoActionPerformed
 
     
 

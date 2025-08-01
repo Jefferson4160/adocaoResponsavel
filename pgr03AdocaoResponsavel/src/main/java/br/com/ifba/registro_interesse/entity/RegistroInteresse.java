@@ -5,12 +5,16 @@
 
 package br.com.ifba.registro_interesse.entity;
 
+import br.com.ifba.animal.entity.Animal;
 import br.com.ifba.infrastructure.entity.PersistenceEntity;
 import br.com.ifba.usuario.entity.Pessoa;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
