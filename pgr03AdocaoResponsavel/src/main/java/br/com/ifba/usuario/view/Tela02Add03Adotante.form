@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="lblCpf" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblNome" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="lblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEndereco" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCidade" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEstado" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="textEstado" alignment="0" min="-2" pref="366" max="-2" attributes="0"/>
+                          <Component id="textCidade" alignment="0" min="-2" pref="366" max="-2" attributes="0"/>
+                          <Component id="textEndereco" alignment="0" min="-2" pref="366" max="-2" attributes="0"/>
+                          <Component id="textTelefone" alignment="0" min="-2" pref="366" max="-2" attributes="0"/>
+                          <Component id="textEmail" alignment="0" min="-2" pref="366" max="-2" attributes="0"/>
+                          <Component id="textNome" alignment="0" min="-2" pref="366" max="-2" attributes="0"/>
+                          <Component id="textCpf" alignment="0" min="-2" pref="366" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblPerfil" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+                      <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                      <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="27" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblPerfil" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textNome" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblCpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textCpf" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblEndereco" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textEndereco" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnCancelar" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JTextField" name="textCidade">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Irec&#xea;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblTelefone">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Telefone:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPerfil">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="ADOTANTE"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNome">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nome:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEndereco">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Endere&#xe7;o:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnCancelar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cancelar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="textTelefone">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="somente numeros sem espa&#xe7;os..."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEmail">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="E-mail:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="textCpf">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="somente numeros..."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Novo cadastro"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="textEstado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="BA"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCidade">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cidade:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="textEndereco">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Rua exemplo N 01"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="textNome">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="nome..."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEstado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Estado:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSalvar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Salvar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCpf">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="CPF:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="textEmail">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="email@dominio.com"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

@@ -13,7 +13,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +23,7 @@ import lombok.NoArgsConstructor;
  */
 @Entity
 @Table(name = "tb_lar_temporario")
-@Data
+@Data // @EqualsAndHashCode(callSuper = true) // Para eliminar warning no @Data porém não é uma pratica recomendada.
 @AllArgsConstructor
 @NoArgsConstructor
 public class LarTemporario extends PersistenceEntity{
@@ -34,7 +33,7 @@ public class LarTemporario extends PersistenceEntity{
     Pessoa pessoa;
 
     @Column(name = "quantidade_max_animais", nullable = false)
-    private int quantidadeMaxAnimais;
+    private Integer quantidadeMaxAnimais;
 
     @Column(name = "disponivel", nullable = false)
     private boolean disponivel;

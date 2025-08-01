@@ -75,12 +75,15 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnRodrigo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Rodrigo"/>
+        <Property name="text" type="java.lang.String" value="Gerenciamento Animais (Rodrigo)"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRodrigoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnJefferson">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Jefferson"/>
+        <Property name="text" type="java.lang.String" value="Gest&#xe3;o de Usu&#xe1;rios (Jefferson)"/>
       </Properties>
     </Component>
   </SubComponents>

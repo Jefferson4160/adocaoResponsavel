@@ -11,7 +11,7 @@
 	<groupId>br.com.ifba</groupId>
 	<artifactId>pgr03AdocaoResponsavel</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>prg03adocaoresponsavel</name>
+	<name>prg03adocaoresponsavel</name> 
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -28,9 +28,8 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
-                <maven.test.skip>true</maven.test.skip>
                 <start-class>br.com.ifba.pgr03AdocaoResponsavel.Pgr03AdocaoResponsavelApplication</start-class>
-                
+                <maven.test.skip>true</maven.test.skip>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -53,6 +52,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+	 <dependency>
+	  <groupId>javax.annotation</groupId>
+	  <artifactId>jsr250-api</artifactId>
+	  <version>1.0</version>
+	  <type>jar</type>
+	 </dependency>
+
 	</dependencies>
 
 	<build>
@@ -87,3 +94,4 @@
 	</build>
 
 </project>
+
