@@ -274,6 +274,10 @@ public final class LarTemporarioView extends javax.swing.JFrame {
 
     private void buttonAdiconarLarTemporarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdiconarLarTemporarioActionPerformed
         // TODO add your handling code here:
+        
+            JOptionPane.showMessageDialog(this, "Para adicionar um Lar temporario é nessesario que use o ID de um Adotante."
+                    + "Caso não tenha cadastrado um adotante sua operação sera invalida, ´primeiro cadastre um adotante.´");
+            
 
             JTextField campoPessoaId = new JTextField();
             JTextField campoQuantidade = new JTextField();

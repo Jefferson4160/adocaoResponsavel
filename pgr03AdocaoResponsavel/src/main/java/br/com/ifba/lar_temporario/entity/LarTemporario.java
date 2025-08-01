@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
  */
 @Entity
 @Table(name = "tb_lar_temporario")
-@Data
+@Data // @EqualsAndHashCode(callSuper = true) // Para eliminar warning no @Data porém não é uma pratica recomendada.
 @AllArgsConstructor
 @NoArgsConstructor
 public class LarTemporario extends PersistenceEntity{
