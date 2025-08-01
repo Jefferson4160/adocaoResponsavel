@@ -33,7 +33,7 @@ public class LarTemporario extends PersistenceEntity{
     Pessoa pessoa;
 
     @Column(name = "quantidade_max_animais", nullable = false)
-    private int quantidadeMaxAnimais;
+    private Integer quantidadeMaxAnimais;
 
     @Column(name = "disponivel", nullable = false)
     private boolean disponivel;

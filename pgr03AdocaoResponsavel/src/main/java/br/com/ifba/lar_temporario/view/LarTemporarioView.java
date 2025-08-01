@@ -275,7 +275,7 @@ public final class LarTemporarioView extends javax.swing.JFrame {
     private void buttonAdiconarLarTemporarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdiconarLarTemporarioActionPerformed
         // TODO add your handling code here:
         
-            JOptionPane.showMessageDialog(this, "Para adicionar um Lar temporario é nessesario que use o ID de um Adotante."
+            JOptionPane.showMessageDialog(this, "Para adicionar um Lar temporario é nessesario que use o ID de um Adotante. "
                     + "Caso não tenha cadastrado um adotante sua operação sera invalida, ´primeiro cadastre um adotante.´");
             
 
@@ -286,7 +286,7 @@ public final class LarTemporarioView extends javax.swing.JFrame {
             JScrollPane scrollObservacoes = new JScrollPane(campoObservacoes);
 
             Object[] campos = {
-                "ID da Pessoa:", campoPessoaId,
+                "ID da Adotante:", campoPessoaId,
                 "Quantidade Máxima de Animais:", campoQuantidade,
                 "Observações:", scrollObservacoes,
                 checkDisponivel
