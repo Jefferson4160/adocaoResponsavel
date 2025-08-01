@@ -42,5 +42,5 @@ public class RegistroInteresse extends PersistenceEntity{
     private StatusInteresse statusInteresse;
     
     @Column(name = "questionário", columnDefinition = "TEXT")
-    private String questionário;
+    private String questionario;
 }
