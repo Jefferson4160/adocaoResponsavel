@@ -8,9 +8,12 @@ import br.com.ifba.lar_temporario.controller.LarTemporarioIController;
 import br.com.ifba.lar_temporario.entity.LarTemporario;
 import jakarta.annotation.PostConstruct;
 import java.awt.HeadlessException;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -175,164 +178,161 @@ public final class LarTemporarioView extends javax.swing.JFrame {
 
     private void buttonAtualizarLarTemporarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarLarTemporarioActionPerformed
         // TODO add your handling code here:
-        /*
         int linhaSelecionada = jTableExibirLarTemporario.getSelectedRow();
 
         if (linhaSelecionada == -1) {
-            JOptionPane.showMessageDialog(this, "Selecione um larTemporario para atualizar.");
+            JOptionPane.showMessageDialog(this, "Selecione um lar temporário para atualizar.");
             return;
         }
 
-        // Pega o ID da linha selecionada (assumindo que está na primeira coluna)
         Long idLarTemporario = (Long) jTableExibirLarTemporario.getValueAt(linhaSelecionada, 0);
 
         try {
-           
-            //Buscando pelo larTemporario!
-            LarTemporario larTemporario = larTemporarioController.findById(idLarTemporario);
-
-            if (larTemporario == null) {
-                JOptionPane.showMessageDialog(this, "LarTemporario não encontrado no banco.");
+            LarTemporario lar = larTemporarioController.findById(idLarTemporario);
+            if (lar == null) {
+                JOptionPane.showMessageDialog(this, "Lar temporário não encontrado.");
                 return;
             }
 
-            // Cria campos preenchidos com os dados atuais
-            JTextField campoNome = new JTextField(larTemporario.getNome());
-            JTextField campoCodigo = new JTextField(larTemporario.getCodigoLarTemporario());
-            JCheckBox checkAtivo = new JCheckBox("LarTemporario Ativo", larTemporario.isAtivo());
+            // Campos de edição
+            JTextField campoQuantidade = new JTextField(String.valueOf(lar.getQuantidadeMaxAnimais()));
+            JTextArea campoObservacoes = new JTextArea(lar.getObservacoes(), 5, 20);
+            JCheckBox checkDisponivel = new JCheckBox("Disponível", lar.isDisponivel());
+            JScrollPane scrollObs = new JScrollPane(campoObservacoes);
 
             Object[] campos = {
-                "Nome:", campoNome,
-                "Código do LarTemporario:", campoCodigo,
-                checkAtivo
+                "Quantidade Máxima de Animais:", campoQuantidade,
+                "Observações:", scrollObs,
+                checkDisponivel
+            };
+
+            int opcao = JOptionPane.showConfirmDialog(this, campos, "Atualizar Lar Temporário", JOptionPane.OK_CANCEL_OPTION);
+
+            if (opcao == JOptionPane.OK_OPTION) {
+                lar.setQuantidadeMaxAnimais(Integer.parseInt(campoQuantidade.getText().trim()));
+                lar.setObservacoes(campoObservacoes.getText().trim());
+                lar.setDisponivel(checkDisponivel.isSelected());
+
+                larTemporarioController.update(lar);
+
+                JOptionPane.showMessageDialog(this, "Lar Temporário atualizado com sucesso!");
+                carregarTabela();
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao atualizar: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_buttonAtualizarLarTemporarioActionPerformed
+
+    private void buttonRemoverLarTemporarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRemoverLarTemporarioActionPerformed
+        // TODO add your handling code here:
+        int linhaSelecionada = jTableExibirLarTemporario.getSelectedRow();
+
+        if (linhaSelecionada == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um lar temporário para excluir.");
+            return;
+        }
+
+        Object valorId = jTableExibirLarTemporario.getValueAt(linhaSelecionada, 0);
+        Long idLarTemporario;
+
+        if (valorId instanceof Long) {
+            idLarTemporario = (Long) valorId;
+        } else if (valorId instanceof Integer) {
+            idLarTemporario = ((Integer) valorId).longValue();
+        } else {
+            JOptionPane.showMessageDialog(this, "ID inválido.");
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(this,
+            "Tem certeza que deseja excluir o lar temporário selecionado?",
+            "Confirmação",
+            JOptionPane.YES_NO_OPTION);
+
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        try {
+            LarTemporario lar = larTemporarioController.findById(idLarTemporario);
+            if (lar == null) {
+                JOptionPane.showMessageDialog(this, "Lar não encontrado no banco.");
+                return;
+            }
+
+            larTemporarioController.delete(lar);
+
+            JOptionPane.showMessageDialog(this, "Lar temporário removido com sucesso!");
+            carregarTabela();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao excluir lar: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_buttonRemoverLarTemporarioActionPerformed
+
+    private void buttonAdiconarLarTemporarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdiconarLarTemporarioActionPerformed
+        // TODO add your handling code here:
+
+            JTextField campoPessoaId = new JTextField();
+            JTextField campoQuantidade = new JTextField();
+            JTextArea campoObservacoes = new JTextArea(5, 20);
+            JCheckBox checkDisponivel = new JCheckBox("Disponível para adoção", true);
+            JScrollPane scrollObservacoes = new JScrollPane(campoObservacoes);
+
+            Object[] campos = {
+                "ID da Pessoa:", campoPessoaId,
+                "Quantidade Máxima de Animais:", campoQuantidade,
+                "Observações:", scrollObservacoes,
+                checkDisponivel
             };
 
             int opcao = JOptionPane.showConfirmDialog(
                 null,
                 campos,
-                "Atualizar LarTemporario",
+                "Adicionar Novo Lar Temporário",
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.PLAIN_MESSAGE
             );
 
             if (opcao == JOptionPane.OK_OPTION) {
-                // Perciste no banco usando o DAO
-                larTemporario.setNome(campoNome.getText());
-                larTemporario.setCodigoLarTemporario(campoCodigo.getText());
-                larTemporario.setAtivo(checkAtivo.isSelected());
-                
-                larTemporarioController.update(larTemporario); // <-- ESSENCIAL
+                try {
+                    // Validações e conversões
+                    Long pessoaId = Long.parseLong(campoPessoaId.getText().trim());
+                    int quantidade = Integer.parseInt(campoQuantidade.getText().trim());
+                    String observacoes = campoObservacoes.getText().trim();
+                    boolean disponivel = checkDisponivel.isSelected();
 
-                JOptionPane.showMessageDialog(this, "LarTemporario atualizado com sucesso!");
-                carregarTabela();
-            }
+                    // Busca Pessoa pelo ID IMPLEMENTAÇÃO FUTURA
+                    //Pessoa pessoa = larTemporarioController.findPessoaById(pessoaId); // você deve criar ou expor esse método no controller
+                    //if (pessoa == null) {
+                        //JOptionPane.showMessageDialog(this, "Pessoa com ID " + pessoaId + " não encontrada.", "Erro", JOptionPane.ERROR_MESSAGE);
+                        //return;
+                    //}
 
-        } catch (HeadlessException e) {
-            JOptionPane.showMessageDialog(this, "Erro ao atualizar larTemporario: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                    // Criação do LarTemporario
+                    LarTemporario lar = new LarTemporario();
+                    //lar.setPessoa(pessoa);
+                    lar.setQuantidadeMaxAnimais(quantidade);
+                    lar.setObservacoes(observacoes);
+                    lar.setDisponivel(disponivel);
+                    lar.setDataCadastro(LocalDateTime.now());
+
+                    larTemporarioController.save(lar);
+
+                    JOptionPane.showMessageDialog(this, "Lar Temporário salvo com sucesso!");
+                    carregarTabela();
+
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "ID e quantidade devem ser números válidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Erro ao salvar Lar Temporário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                }
         }
-        */
-    }//GEN-LAST:event_buttonAtualizarLarTemporarioActionPerformed
 
-    private void buttonRemoverLarTemporarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRemoverLarTemporarioActionPerformed
-        // TODO add your handling code here:
-        /*
-        int linhaSelecionada = jTableExibirLarTemporario.getSelectedRow();
 
-          if (linhaSelecionada == -1) {
-              JOptionPane.showMessageDialog(this, "Selecione um larTemporario para deletar.");
-              return;
-          }
-
-          // Pega o ID do larTemporario na primeira coluna (ajuste se for outra coluna)
-          Long idLarTemporario = null;
-          Object valorId = jTableExibirLarTemporario.getValueAt(linhaSelecionada, 0);
-          if (valorId instanceof Long) {
-              idLarTemporario = (Long) valorId;
-          } else if (valorId instanceof Integer) {
-              // Caso venha como Integer do banco, converte para Long
-              idLarTemporario = ((Integer) valorId).longValue();
-          } else {
-              JOptionPane.showMessageDialog(this, "ID do larTemporario inválido.");
-              return;
-          }
-
-          int confirm = JOptionPane.showConfirmDialog(this,
-              "Tem certeza que deseja excluir o larTemporario selecionado?",
-              "Confirmar exclusão",
-              JOptionPane.YES_NO_OPTION);
-
-          if (confirm != JOptionPane.YES_OPTION) {
-              return; // Cancelou exclusão
-          }
-
-          try {
-              
-             
-              LarTemporario larTemporario = larTemporarioController.findById(idLarTemporario);
-              
-              if (larTemporario == null) {
-                  JOptionPane.showMessageDialog(this, "LarTemporario não encontrado no banco.");
-                  return;
-              }
-              // Detleta usando as camadas
-              larTemporarioController.delete(larTemporario);
-
-              JOptionPane.showMessageDialog(this, "LarTemporario excluído com sucesso!");
-              carregarTabela();
-
-          } catch (HeadlessException e) {
-              JOptionPane.showMessageDialog(this, "Erro ao excluir larTemporario: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-          }
-        */
-    }//GEN-LAST:event_buttonRemoverLarTemporarioActionPerformed
-
-    private void buttonAdiconarLarTemporarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdiconarLarTemporarioActionPerformed
-        // TODO add your handling code here:
         
-        /*
-        JTextField campoNome = new JTextField();
-        JTextField campoCodigo = new JTextField();
-        JCheckBox checkAtivo = new JCheckBox("LarTemporario Ativo", true); // Marcado como padrão
-
-        Object[] campos = {
-            "Nome:", campoNome,
-            "Código do LarTemporario:", campoCodigo,
-            checkAtivo
-        };
-
-        int opcao = JOptionPane.showConfirmDialog(
-            null,
-            campos,
-            "Adicionar Novo LarTemporario",
-            JOptionPane.OK_CANCEL_OPTION,
-            JOptionPane.PLAIN_MESSAGE
-        );
-
-        if (opcao == JOptionPane.OK_OPTION) {
-            String nome = campoNome.getText();
-            String codigo = campoCodigo.getText();
-            boolean ativo = checkAtivo.isSelected(); // Pega o valor do checkbox
-
-            try {
-                LarTemporario larTemporario = new LarTemporario();
-                larTemporario.setNome(nome);
-                larTemporario.setCodigoLarTemporario(codigo);
-                larTemporario.setAtivo(ativo); // Define com base no checkbox
-                
-                // Salva usando as camadas
-               
-                larTemporarioController.save(larTemporario);
-                
-
-                JOptionPane.showMessageDialog(null, "LarTemporario salvo com sucesso!");
-                carregarTabela();
-
-            } catch (HeadlessException e) {
-                JOptionPane.showMessageDialog(null, "Erro ao salvar larTemporario: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-
-        */
     }//GEN-LAST:event_buttonAdiconarLarTemporarioActionPerformed
 
     private void jTextFildBuscarLarTemporarioPorIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFildBuscarLarTemporarioPorIDActionPerformed
