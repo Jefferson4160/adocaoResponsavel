@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import java.io.Serializable;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -17,11 +18,12 @@ import lombok.Getter;
  */
 @MappedSuperclass
 @Getter
+@Setter
 public class PersistenceEntity implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     //gerenciado pelo lombook agr
-    
+  
 }

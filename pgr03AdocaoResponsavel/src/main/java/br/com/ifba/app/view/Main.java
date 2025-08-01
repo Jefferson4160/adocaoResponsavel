@@ -4,9 +4,15 @@
  */
 package br.com.ifba.app.view;
 
+import br.com.ifba.usuario.controller.UsuarioIController;
+import br.com.ifba.usuario.view.Tela01IdentificacaoUsuario;
 import jakarta.annotation.PostConstruct;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 
 /**
  *
@@ -14,7 +20,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Main extends javax.swing.JFrame {
-
+    @Autowired 
+    private UsuarioIController usuarioController;
+    @Autowired
+    private Tela01IdentificacaoUsuario tela01IdentificacaoUsuario;
     /**
      * Creates new form Main
      */
@@ -48,9 +57,11 @@ public class Main extends javax.swing.JFrame {
                 btnRodrigoActionPerformed(evt);
             }
         });
-        btnJefferson.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnJeffersonActionPerformed(evt);
+        
+        btnJefferson.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent evt) {
+                tela01IdentificacaoUsuario.setVisible(true);
+                Main.this.setVisible(false);
             }
         });
 
@@ -114,7 +125,7 @@ public class Main extends javax.swing.JFrame {
 
         btnRodrigo.setText("Rodrigo");
 
-        btnJefferson.setText("Jefferson");
+        btnJefferson.setText("Gestão de Usuários (Jefferson)");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
