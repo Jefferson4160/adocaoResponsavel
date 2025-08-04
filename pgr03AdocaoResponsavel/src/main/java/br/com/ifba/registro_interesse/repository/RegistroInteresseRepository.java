@@ -16,7 +16,7 @@ import java.util.List;
  * @author inque
  */
 @Repository
-public class RegistroInteresseRepository extends JpaRepository<RegistroInteresse, Long>{
+public interface RegistroInteresseRepository extends JpaRepository<RegistroInteresse, Long>{
     
     //exemplo de consulta
     //List<RegistroInteresse> findByStatusInteresse(RegistroInteresse.StatusInteresse status);

@@ -17,7 +17,7 @@ import java.awt.*;
  */
 public class RegistroInteresseView extends javax.swing.JFrame {
     
-    private final RegistroInteresseIController registroInteresseController;
+   // private final RegistroInteresseIController registroInteresseController;
 
     /** Creates new form RegistroInteresseView */
     public RegistroInteresseView(ConfigurableApplicationContext context) {
@@ -78,8 +78,9 @@ public class RegistroInteresseView extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new RegistroInteresseView().setVisible(true);
+            //    new RegistroInteresseView().setVisible(true);
             }
         });
     }

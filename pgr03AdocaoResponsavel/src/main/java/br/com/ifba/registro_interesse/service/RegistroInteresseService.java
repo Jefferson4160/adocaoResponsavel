@@ -32,7 +32,7 @@ public class RegistroInteresseService {
         if (registroInteresse.getId() == null) {
             registroInteresse.setDataRegistro(LocalDateTime.now());
             if (registroInteresse.getStatusInteresse() == null) {
-                registroInteresse.setStatusInteresse(RegistroInteresse.StatusInteresse.EM_ANALISE);
+            //      registroInteresse.setStatusInteresse(RegistroInteresse.StatusInteresse.EM_ANALISE);
             }
         }
         // outras regras quando tiver

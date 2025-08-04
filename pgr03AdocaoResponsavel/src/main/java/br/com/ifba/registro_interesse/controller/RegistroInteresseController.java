@@ -18,7 +18,7 @@ import java.util.List;
  * @author inque
  */
 @Controller
-public class RegistroInteresseController {
+public class RegistroInteresseController implements RegistroInteresseIController{
     
     private final RegistroInteresseService registroInteresseService;
 

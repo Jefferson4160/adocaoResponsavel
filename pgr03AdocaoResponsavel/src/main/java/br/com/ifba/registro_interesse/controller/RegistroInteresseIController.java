@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author inque
  */
-public class RegistroInteresseIController {
+public interface RegistroInteresseIController {
     
     RegistroInteresse save(RegistroInteresse registroInteresse);
 

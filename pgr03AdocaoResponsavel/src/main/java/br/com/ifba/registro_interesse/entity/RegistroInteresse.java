@@ -47,4 +47,12 @@ public class RegistroInteresse extends PersistenceEntity{
     
     @Column(name = "questionário", columnDefinition = "TEXT")
     private String questionario;
+
+    public void setDataRegistro(LocalDateTime now) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Object getStatusInteresse() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
