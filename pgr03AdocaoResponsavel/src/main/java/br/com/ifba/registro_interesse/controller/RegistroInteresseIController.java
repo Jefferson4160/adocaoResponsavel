@@ -5,7 +5,7 @@
 
 package br.com.ifba.registro_interesse.controller;
 
-import br.com.ftba.registro_interesse.entity.RegistroInteresse;
+import br.com.ifba.registro_interesse.entity.RegistroInteresse;
 import java.util.List;
 
 /**

@@ -5,8 +5,8 @@
 
 package br.com.ifba.registro_interesse.service;
 
-import br.com.ftba.registro_interesse.entity.RegistroInteresse;
-import br.com.ftba.registro_interesse.repository.RegistroInteresseRepository;
+import br.com.ifba.registro_interesse.entity.RegistroInteresse;
+import br.com.ifba.registro_interesse.repository.RegistroInteresseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

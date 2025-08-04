@@ -5,7 +5,7 @@
 
 package br.com.ifba.registro_interesse.view;
 
-import br.com.ftba.registro_interesse.controller.RegistroInteresseIController;
+import br.com.ifba.registro_interesse.controller.RegistroInteresseIController;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import javax.swing.*;

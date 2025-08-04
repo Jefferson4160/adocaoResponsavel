@@ -5,7 +5,7 @@
 
 package br.com.ifba.registro_interesse.repository;
 
-import br.com.ftba.registro_interesse.entity.RegistroInteresse;
+import br.com.ifba.registro_interesse.entity.RegistroInteresse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

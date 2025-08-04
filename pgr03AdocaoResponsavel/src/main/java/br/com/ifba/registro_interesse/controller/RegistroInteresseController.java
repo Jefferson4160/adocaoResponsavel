@@ -5,8 +5,8 @@
 
 package br.com.ifba.registro_interesse.controller;
 
-import br.com.ftba.registro_interesse.entity.RegistroInteresse;
-import br.com.ftba.registro_interesse.service.RegistroInteresseService;
+import br.com.ifba.registro_interesse.entity.RegistroInteresse;
+import br.com.ifba.registro_interesse.service.RegistroInteresseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
