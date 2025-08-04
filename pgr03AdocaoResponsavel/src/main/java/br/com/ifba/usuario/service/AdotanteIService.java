@@ -19,4 +19,7 @@ public interface AdotanteIService {
     List<Adotante> findAll();
     Optional<Adotante> findById(Long id);
     List<Adotante> findByNomeContaining(String nome);
+    
+    //Declaração do método de adotantes com denuncias
+    List<Adotante> findAdotantesComDenuncias();
 }

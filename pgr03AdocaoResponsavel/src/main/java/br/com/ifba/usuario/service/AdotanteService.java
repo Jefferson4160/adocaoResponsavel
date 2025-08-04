@@ -165,4 +165,16 @@ public class AdotanteService implements AdotanteIService {
             }
         }
     }
+    
+    // Metodo de busca para adotantes com denuncias
+    @Override
+    public List<Adotante> findAdotantesComDenuncias() {
+        try {
+            log.debug("Listando todos os adotantes com denúncias...");
+            return adotanteRepository.findAdotantesComDenuncias();
+        } catch (RuntimeException e) {
+            log.error("Erro ao listar adotantes com denúncias: {}", e.getMessage(), e);
+            throw new RuntimeException("Falha ao listar adotantes com denúncias", e);
+        }
+    }
 }

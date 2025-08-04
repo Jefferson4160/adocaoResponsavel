@@ -7,6 +7,7 @@ package br.com.ifba.usuario.repository;
 import br.com.ifba.adotante.entity.Adotante;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository; 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository; 
 
 /**
@@ -16,6 +17,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AdotanteRepository extends JpaRepository<Adotante, Long> {
 
-    public List<Adotante> findByNomeContainingIgnoreCase(String nome);
+    List<Adotante> findByNomeContainingIgnoreCase(String nome);
     
+    // Novo método para buscar denuncias de adotantes
+    @Query("SELECT a FROM Adotante a WHERE a.id IN (SELECT d.denunciado.id FROM Denuncia d)")
+    List<Adotante> findAdotantesComDenuncias();
 }
