@@ -24,5 +24,7 @@ public interface AnimalIController {
     List<Animal> findAll();
 
     Animal findById(Long id);
+
+    void deleteById(Long id);
 }
 

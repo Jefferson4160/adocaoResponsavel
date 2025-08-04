@@ -89,4 +89,23 @@ public class AnimalService implements AnimalIService{
         return animalRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Animal não encontrado com o ID fornecido."));
     }
+    
+    @Override
+    public void deleteById(Long id) throws RuntimeException {
+        log.info("Tentando deletar Animal por ID: {}", id);
+
+        if (id == null) {
+            log.info("Tentativa de deletar com ID nulo.");
+            throw new RuntimeException("ID para exclusão não pode ser nulo.");
+        }
+
+        if (!animalRepository.existsById(id)) {
+            log.info("Tentativa de deletar ID inexistente: {}", id);
+            throw new RuntimeException("Animal com o ID " + id + " não encontrado para exclusão.");
+        }
+
+        animalRepository.deleteById(id);
+        log.info("Animal com ID {} deletado com sucesso.", id);
+    }
+    
 }

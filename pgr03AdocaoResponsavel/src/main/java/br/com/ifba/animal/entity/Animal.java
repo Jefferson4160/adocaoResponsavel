@@ -40,7 +40,7 @@ public class Animal extends PersistenceEntity {
     @Column(name = "genero", nullable = false)
     private String genero;
     
-    @Column(name = "adotdato", nullable = false)
+    @Column(name = "adotado", nullable = false)
     private boolean adotado; // Se foi adotado ou não
     
    

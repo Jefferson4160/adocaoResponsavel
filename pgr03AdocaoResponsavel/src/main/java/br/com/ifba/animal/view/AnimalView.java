@@ -4,6 +4,13 @@
  */
 package br.com.ifba.animal.view;
 
+import br.com.ifba.animal.controller.AnimalIController;
+import br.com.ifba.animal.entity.Animal;
+import java.awt.HeadlessException;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,13 +20,18 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class AnimalView extends javax.swing.JFrame {
-
+    
+    @Autowired
+    private AnimalIController animalController;
+    
+  
     /**
      * Creates new form AnimalView
      */
     @Autowired
     public AnimalView() {
         initComponents();
+        
     }
 
     /**
@@ -36,9 +48,7 @@ public class AnimalView extends javax.swing.JFrame {
         btnAdicionarAnimal = new javax.swing.JButton();
         btnEditarAnimal = new javax.swing.JButton();
         btnRemoverAnimal = new javax.swing.JButton();
-        txtPesquisar = new javax.swing.JTextField();
-        btnPesquisarPorEspecie = new javax.swing.JButton();
-        lblPesquisar = new javax.swing.JLabel();
+        btnAtualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,12 +85,25 @@ public class AnimalView extends javax.swing.JFrame {
         });
 
         btnEditarAnimal.setText("Editar Animal");
+        btnEditarAnimal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarAnimalActionPerformed(evt);
+            }
+        });
 
         btnRemoverAnimal.setText("Remover Animal");
+        btnRemoverAnimal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverAnimalActionPerformed(evt);
+            }
+        });
 
-        btnPesquisarPorEspecie.setText("🔍");
-
-        lblPesquisar.setText("Pesquisar Animal por Espécie");
+        btnAtualizar.setText("🔄");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,33 +112,24 @@ public class AnimalView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(64, 64, 64)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnAdicionarAnimal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEditarAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnRemoverAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPesquisarPorEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92))
+                .addGap(101, 101, 101)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAdicionarAnimal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEditarAnimal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnRemoverAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
-                .addComponent(lblPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addContainerGap(66, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPesquisarPorEspecie))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57)
                         .addComponent(btnAdicionarAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnEditarAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,8 +143,173 @@ public class AnimalView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdicionarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarAnimalActionPerformed
-        // TODO add your handling code here:
+        
+        // Cria campos de entrada vazios
+        JTextField campoEspecie = new JTextField();
+        JTextField campoRaca = new JTextField();
+        JTextField campoGenero = new JTextField();
+        JTextField campoNome = new JTextField();
+        JTextField campoIdade = new JTextField();
+
+        // Agrupa os campos para exibição no JOptionPane
+        Object[] campos = {
+            "Espécie:", campoEspecie,
+            "Raça:", campoRaca,
+            "Gênero:", campoGenero,
+            "Nome:", campoNome,
+            "Idade:", campoIdade
+        };
+
+        // Exibe o formulário para adicionar um novo animal
+        int opcao = JOptionPane.showConfirmDialog(
+            null,
+            campos,
+            "Adicionar Novo Animal",
+            JOptionPane.OK_CANCEL_OPTION,
+            JOptionPane.PLAIN_MESSAGE
+        );
+
+        if (opcao == JOptionPane.OK_OPTION) {
+            try {
+                String especie = campoEspecie.getText().trim();
+                String raca = campoRaca.getText().trim();
+                String genero = campoGenero.getText().trim();
+                String nome = campoNome.getText().trim();
+                int idade = Integer.parseInt(campoIdade.getText().trim());
+
+            
+                if (especie.isEmpty() || raca.isEmpty() || genero.isEmpty() || nome.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+           
+                Animal novoAnimal = new Animal();
+                novoAnimal.setEspecie(especie);
+                novoAnimal.setRaca(raca);
+                novoAnimal.setGenero(genero);
+                novoAnimal.setNome(nome);
+                novoAnimal.setIdade(idade);
+                novoAnimal.setAdotado(false); // Padrão: não adotado
+
+                
+                animalController.save(novoAnimal);
+
+                JOptionPane.showMessageDialog(null, "Animal salvo com sucesso!");
+
+                // Atualiza a tabela para mostrar o novo registro
+                atualizarTabela();
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Idade inválida! Informe um número inteiro.", "Erro", JOptionPane.ERROR_MESSAGE);
+            } catch (HeadlessException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao salvar animal: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnAdicionarAnimalActionPerformed
+
+    private void btnRemoverAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverAnimalActionPerformed
+        String idString = JOptionPane.showInputDialog(null, "Digite o ID do animal que deseja excluir:");
+
+        if (idString == null || idString.trim().isEmpty()) {
+            return;
+        }
+
+        try {
+            Long id = Long.valueOf(idString.trim());
+
+            int opcao = JOptionPane.showConfirmDialog(
+                null, 
+                "Tem certeza que deseja excluir o animal com o ID " + id + "?", 
+                "Confirmar Exclusão", 
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+            );
+
+            if (opcao == JOptionPane.YES_OPTION) {
+                animalController.deleteById(id);
+
+                JOptionPane.showMessageDialog(null, "Animal com o ID " + id + " excluído com sucesso!");
+
+                atualizarTabela();
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "ID inválido. Por favor, digite um número.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir animal: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnRemoverAnimalActionPerformed
+
+    private void btnEditarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAnimalActionPerformed
+         String idString = JOptionPane.showInputDialog(null, "Digite o ID do animal que deseja editar:");
+
+        if (idString == null || idString.trim().isEmpty()) {
+            return;
+        }
+
+        try {
+            Long id = Long.valueOf(idString.trim());
+
+            Animal animalParaEditar = animalController.findById(id);
+
+            JTextField campoEspecie = new JTextField(animalParaEditar.getEspecie());
+            JTextField campoRaca = new JTextField(animalParaEditar.getRaca());
+            JTextField campoGenero = new JTextField(animalParaEditar.getGenero());
+            JTextField campoNome = new JTextField(animalParaEditar.getNome());
+            JTextField campoIdade = new JTextField(String.valueOf(animalParaEditar.getIdade()));
+
+            Object[] campos = {
+                "Espécie:", campoEspecie,
+                "Raça:", campoRaca,
+                "Gênero:", campoGenero,
+                "Nome:", campoNome,
+                "Idade:", campoIdade
+            };
+
+            int opcao = JOptionPane.showConfirmDialog(
+                null,
+                campos,
+                "Editar Animal (ID: " + id + ")",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE
+            );
+
+            if (opcao == JOptionPane.OK_OPTION) {
+                String novaEspecie = campoEspecie.getText().trim();
+                String novaRaca = campoRaca.getText().trim();
+                String novoGenero = campoGenero.getText().trim();
+                String novoNome = campoNome.getText().trim();
+                int novaIdade = Integer.parseInt(campoIdade.getText().trim());
+
+                if (novaEspecie.isEmpty() || novaRaca.isEmpty() || novoGenero.isEmpty() || novoNome.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                animalParaEditar.setEspecie(novaEspecie);
+                animalParaEditar.setRaca(novaRaca);
+                animalParaEditar.setGenero(novoGenero);
+                animalParaEditar.setNome(novoNome);
+                animalParaEditar.setIdade(novaIdade);
+
+                animalController.update(animalParaEditar);
+
+                JOptionPane.showMessageDialog(null, "Animal com ID " + id + " atualizado com sucesso!");
+
+                atualizarTabela();
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "ID e Idade devem ser números válidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao editar animal: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEditarAnimalActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        atualizarTabela();
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,20 +340,37 @@ public class AnimalView extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new AnimalView().setVisible(true);
             }
         });
     }
+    
+    private void atualizarTabela() {
+    List<Animal> lista = animalController.findAll();
+    DefaultTableModel modelo = (DefaultTableModel) jTableAnimaisCadastrados.getModel();
+    modelo.setRowCount(0); // limpa a tabela
+
+    for (Animal animal : lista) {
+        modelo.addRow(new Object[]{
+            animal.getId(),
+            animal.getEspecie(),
+            animal.getRaca(),
+            animal.getIdade(),
+            animal.getNome(),
+            animal.getGenero(),
+            animal.isAdotado()
+        });
+    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarAnimal;
+    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnEditarAnimal;
-    private javax.swing.JButton btnPesquisarPorEspecie;
     private javax.swing.JButton btnRemoverAnimal;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableAnimaisCadastrados;
-    private javax.swing.JLabel lblPesquisar;
-    private javax.swing.JTextField txtPesquisar;
     // End of variables declaration//GEN-END:variables
 }

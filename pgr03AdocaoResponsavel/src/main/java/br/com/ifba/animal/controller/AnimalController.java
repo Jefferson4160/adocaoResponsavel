@@ -53,4 +53,11 @@ public class AnimalController implements AnimalIController {
         log.info("Buscando Animal por ID");
         return animalService.findById(id);
     }
+    
+    @Override
+    public void deleteById(Long id) {
+        log.info("Deletando Animal pelo ID: " + id);
+        animalService.deleteById(id);
+    }
+    
 }

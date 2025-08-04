@@ -23,4 +23,6 @@ public interface AnimalIService {
     
     Animal findById(Long id);
     
+    
+     void deleteById(Long id);
 }
