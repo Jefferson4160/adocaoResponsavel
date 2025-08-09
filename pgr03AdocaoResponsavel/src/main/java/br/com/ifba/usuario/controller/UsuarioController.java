@@ -4,43 +4,104 @@
  */
 package br.com.ifba.usuario.controller;
 
+import br.com.ifba.usuario.service.UsuarioIService;
 import br.com.ifba.usuario.entity.Usuario;
-import br.com.ifba.usuario.service.UsuarioService; // Importar a interface de serviço
 import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired; // Para injeção de dependência
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 
 
-@Controller 
+@Controller // Anotação que marca a classe como um controlador do Spring.
+@RequiredArgsConstructor // Gera o construtor para injeção de dependência do UsuarioIService.
+@Slf4j // Habilita o uso de logs na classe.
 public class UsuarioController implements UsuarioIController {
-
-    @Autowired
-    private UsuarioService usuarioService;
-
     
+    // Atributo final para injeção de dependência do serviço.
+    private final UsuarioIService usuarioService;
+
     @Override
-    public List<Usuario> findAll() {
-        // Log ou tratamento de requisição antes de chamar o serviço
-        System.out.println("Requisição para buscar todos os usuários recebida no Controller.");
-        return usuarioService.findAll();
+    public Usuario salvarUsuario(Usuario usuario) {
+        log.info("Recebendo solicitação para salvar usuário.");
+        try {
+            // Delega a tarefa de salvar ao serviço.
+            return usuarioService.save(usuario);
+        } catch (RuntimeException e) {
+            log.error("Erro ao salvar usuário: {}", e.getMessage());
+            throw e;
+        }
     }
 
     @Override
-    public Optional<Usuario> findById(Long id) {
-        System.out.println("Requisição para buscar usuário pelo ID: " + id + " recebida no Controller.");
-        return usuarioService.findById(id);
+    public Usuario atualizarUsuario(Usuario usuario) {
+        log.info("Recebendo solicitação para atualizar usuário.");
+        try {
+            // Delega a atualização ao serviço.
+            return usuarioService.save(usuario);
+        } catch (RuntimeException e) {
+            log.error("Erro ao atualizar usuário: {}", e.getMessage());
+            throw e;
+        }
     }
 
     @Override
-    public List<Usuario> findByNomeContaining(String nome) {
-        System.out.println("Requisição para buscar usuários pelo nome contendo: " + nome + " recebida no Controller.");
-        return usuarioService.findByNomeContaining(nome);
+    public void deletarUsuario(Usuario usuario) {
+        log.info("Recebendo solicitação para deletar usuário.");
+        try {
+            // Delega a exclusão ao serviço.
+            usuarioService.delete(usuario);
+        } catch (RuntimeException e) {
+            log.error("Erro ao deletar usuário: {}", e.getMessage());
+            throw e;
+        }
     }
 
     @Override
-    public Optional<Usuario> findByCpf(String cpf) {
-        System.out.println("Requisição para buscar usuário pelo CPF: " + cpf + " recebida no Controller.");
-        return usuarioService.findByCpf(cpf);
+    public Optional<Usuario> buscarUsuarioPorId(Long id) {
+        log.info("Recebendo solicitação para buscar usuário com ID: {}", id);
+        try {
+            // Delega a busca ao serviço.
+            return usuarioService.findById(id);
+        } catch (RuntimeException e) {
+            log.error("Erro ao buscar usuário por ID: {}", e.getMessage());
+            throw e;
+        }
+    }
+
+    @Override
+    public List<Usuario> buscarTodosUsuarios() {
+        log.info("Recebendo solicitação para buscar todos os usuários.");
+        try {
+            // Delega a busca de todos os usuários ao serviço.
+            return usuarioService.findAll();
+        } catch (RuntimeException e) {
+            log.error("Erro ao buscar todos os usuários: {}", e.getMessage());
+            throw e;
+        }
+    }
+
+    @Override
+    public List<Usuario> buscarUsuarioPorNome(String nome) {
+        log.info("Recebendo solicitação para buscar usuário por nome: {}", nome);
+        try {
+            // Delega a busca por nome ao serviço.
+            return usuarioService.findByNomeContaining(nome);
+        } catch (RuntimeException e) {
+            log.error("Erro ao buscar usuário por nome: {}", e.getMessage());
+            throw e;
+        }
+    }
+
+    @Override
+    public Optional<Usuario> buscarUsuarioPorCpf(String cpf) {
+        log.info("Recebendo solicitação para buscar usuário por CPF: {}", cpf);
+        try {
+            // Delega a busca por CPF ao serviço.
+            return usuarioService.findByCpf(cpf);
+        } catch (RuntimeException e) {
+            log.error("Erro ao buscar usuário por CPF: {}", e.getMessage());
+            throw e;
+        }
     }
 }

@@ -16,8 +16,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VoluntarioRepository extends JpaRepository<Voluntario, Long> {
 
-    public List<Voluntario> findByNomeContainingIgnoreCase(String nome);
-
-    public List<Voluntario> findByAreaAtuacaoContainingIgnoreCase(String areaAtuacao);
+    List<Voluntario> findByNomeContainingIgnoreCase(String nome);
+    
+    List<Voluntario> findByAreaDeAtuacao(String areaDeAtuacao);
     
 }

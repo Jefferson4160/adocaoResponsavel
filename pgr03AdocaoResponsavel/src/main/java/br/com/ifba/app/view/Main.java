@@ -5,9 +5,9 @@
 package br.com.ifba.app.view;
 
 import br.com.ifba.usuario.controller.UsuarioIController;
-import br.com.ifba.usuario.view.Tela01IdentificacaoUsuario;
 
 import br.com.ifba.animal.view.AnimalView;
+import br.com.ifba.gerenciamentoUsuarios.view.GerenciamentoUsuariosTela01;
 import br.com.ifba.lar_temporario.view.LarTemporarioView;
 import br.com.ifba.tela.util.ApplicationContextProvider;
 
@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 
@@ -27,8 +28,10 @@ import org.springframework.stereotype.Component;
 public class Main extends javax.swing.JFrame {
     @Autowired 
     private UsuarioIController usuarioController;
+    @Lazy
     @Autowired
-    private Tela01IdentificacaoUsuario tela01IdentificacaoUsuario;
+    private GerenciamentoUsuariosTela01 gerenciamentoUsuariosTela01;
+    
     /**
      * Creates new form Main
      */
@@ -69,7 +72,7 @@ public class Main extends javax.swing.JFrame {
         
         btnJefferson.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent evt) {
-                tela01IdentificacaoUsuario.setVisible(true);
+                gerenciamentoUsuariosTela01.setVisible(true); 
                 Main.this.setVisible(false);
             }
         });

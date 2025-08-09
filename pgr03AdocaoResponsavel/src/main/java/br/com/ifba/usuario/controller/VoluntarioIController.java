@@ -8,20 +8,27 @@ import br.com.ifba.voluntario.entity.Voluntario;
 import java.util.List;
 import java.util.Optional;
 
+// Interface que define o contrato do controlador para as operações de Voluntário.
 public interface VoluntarioIController {
 
-    List<Voluntario> findAll();
-    
-    Optional<Voluntario> findById(Long id);
-    
-    List<Voluntario> findByNomeContaining(String nome);
+    // Método para salvar um novo voluntário.
+    Voluntario salvarVoluntario(Voluntario voluntario);
 
-    List<Voluntario> findByAreaAtuacao(String areaAtuacao); // Método específico para Voluntário
-    
-    // Métodos para operações de CRUD
-    Voluntario save(Voluntario voluntario);
-    
-    Voluntario update(Voluntario voluntario);
-    
-    void delete(Long id);
+    // Método para atualizar um voluntário existente.
+    Voluntario atualizarVoluntario(Voluntario voluntario);
+
+    // Método para deletar um voluntário.
+    void deletarVoluntario(Voluntario voluntario);
+
+    // Método para buscar um voluntário pelo seu ID.
+    Optional<Voluntario> buscarVoluntarioPorId(Long id);
+
+    // Método para buscar todos os voluntários.
+    List<Voluntario> buscarTodosVoluntarios();
+
+    // Método para buscar voluntários por parte do nome da pessoa associada.
+    List<Voluntario> buscarVoluntarioPorNome(String nome);
+
+    // Método para buscar voluntários pela área de atuação.
+    List<Voluntario> buscarVoluntarioPorAreaAtuacao(String areaAtuacao);
 }

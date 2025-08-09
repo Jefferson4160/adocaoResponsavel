@@ -12,16 +12,27 @@ import java.util.Optional;
  * Interface que define o contrato da camada de Controle para operações de Usuários.
  * @author Jefferson S
  */
+// Interface que define o contrato do controlador para as operações de Usuário.
 public interface UsuarioIController {
-
-   
-    List<Usuario> findAll(); 
     
-    Optional<Usuario> findById(Long id); 
+    // Método para salvar um novo usuário.
+    Usuario salvarUsuario(Usuario usuario);
     
-    List<Usuario> findByNomeContaining(String nome); 
+    // Método para atualizar um usuário existente.
+    Usuario atualizarUsuario(Usuario usuario);
     
-    Optional<Usuario> findByCpf(String cpf);
-
-
+    // Método para deletar um usuário.
+    void deletarUsuario(Usuario usuario);
+    
+    // Método para buscar um usuário pelo seu ID.
+    Optional<Usuario> buscarUsuarioPorId(Long id);
+    
+    // Método para buscar todos os usuários.
+    List<Usuario> buscarTodosUsuarios();
+    
+    // Método para buscar usuários por parte do nome da pessoa associada.
+    List<Usuario> buscarUsuarioPorNome(String nome);
+    
+    // Método para buscar um usuário por CPF.
+    Optional<Usuario> buscarUsuarioPorCpf(String cpf);
 }

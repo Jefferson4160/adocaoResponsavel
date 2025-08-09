@@ -18,9 +18,9 @@ import org.springframework.stereotype.Repository;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     // --- MÉTODOS DE BUSCA ---
-    // Busca por nome
-    List<Usuario> findByNomeContainingIgnoreCase(String nome);
+    // Busca por nome na entidade Pessoa
+    List<Usuario> findByPessoa_NomeContainingIgnoreCase(String nome);
 
-    // Busca por CPF
-    Optional<Usuario> findByCpf(String cpf);
+    // Busca por CPF na entidade Pessoa
+    Optional<Usuario> findByPessoa_Cpf(String cpf);
 }

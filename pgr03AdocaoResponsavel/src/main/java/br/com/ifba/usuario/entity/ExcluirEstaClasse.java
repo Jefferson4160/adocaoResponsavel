@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pessoa extends PersistenceEntity{
+public class ExcluirEstaClasse extends PersistenceEntity{
     
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;

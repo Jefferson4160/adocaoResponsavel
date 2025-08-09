@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional; 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Implementação de Serviço para a entidade base Usuario.
@@ -21,111 +22,84 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+
 public class UsuarioService implements UsuarioIService {
 
-    private final UsuarioRepository usuarioRepository;
-
+    // Injeção de dependência do repositório para acesso ao banco de dados.
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+    
     @Override
     public List<Usuario> findAll() {
         try {
-            log.debug("Listando todos os usuários...");
+            // Retorna a lista completa de usuários.
             return usuarioRepository.findAll();
         } catch (RuntimeException e) {
-            log.error("Erro ao listar todos os usuários: {}", e.getMessage(), e);
-            throw new RuntimeException("Falha ao listar todos os usuários", e);
+            throw new RuntimeException("Erro no service ao listar todos os usuários: " + e.getMessage(), e);
         }
     }
 
     @Override
     public Optional<Usuario> findById(Long id) {
+        // Validação básica do ID.
         if (id == null) {
             throw new IllegalArgumentException("ID do usuário não pode ser nulo para busca.");
         }
         try {
-            log.debug("Buscando usuário por ID: {}", id);
+            // Busca o usuário por ID.
             return usuarioRepository.findById(id);
         } catch (RuntimeException e) {
-            log.error("Erro ao buscar usuário por ID {}: {}", id, e.getMessage(), e);
-            throw new RuntimeException("Falha ao buscar usuário por ID", e);
+            throw new RuntimeException("Erro no service ao buscar usuário por ID: " + e.getMessage(), e);
         }
     }
 
     @Override
     public List<Usuario> findByNomeContaining(String nome) {
-        if (StringUtil.isNullOrEmpty(nome)) {
-            return findAll(); // Retorna todos se a busca por nome for vazia
+        // Valida se o nome não está vazio.
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("O nome para busca não pode ser vazio.");
         }
         try {
-            log.debug("Buscando usuários por nome: {}", nome);
-            return usuarioRepository.findByNomeContainingIgnoreCase(nome); // Chama o método do repositório
+            // Delega a busca por nome ao repositório. Ele sabe como buscar na entidade Pessoa.
+            return usuarioRepository.findByPessoa_NomeContainingIgnoreCase(nome);
         } catch (RuntimeException e) {
-            log.error("Erro ao buscar usuários por nome '{}': {}", nome, e.getMessage(), e);
-            throw new RuntimeException("Falha ao buscar usuários por nome", e);
+            throw new RuntimeException("Erro no service ao buscar usuário por nome: " + e.getMessage(), e);
         }
     }
 
     @Override
     public Optional<Usuario> findByCpf(String cpf) {
-        if (StringUtil.isNullOrEmpty(cpf)) {
-            throw new IllegalArgumentException("CPF não pode ser vazio para busca.");
+        // Valida se o CPF não está vazio.
+        if (cpf == null || cpf.trim().isEmpty()) {
+            throw new IllegalArgumentException("O CPF para busca não pode ser vazio.");
         }
         try {
-            log.debug("Buscando usuário por CPF: {}", cpf);
-            return usuarioRepository.findByCpf(cpf);
+            // Delega a busca por CPF ao repositório. Ele busca na entidade Pessoa.
+            return usuarioRepository.findByPessoa_Cpf(cpf);
         } catch (RuntimeException e) {
-            log.error("Erro ao buscar usuário por CPF {}: {}", cpf, e.getMessage(), e);
-            throw new RuntimeException("Falha ao buscar usuário por CPF", e);
+            throw new RuntimeException("Erro no service ao buscar usuário por CPF: " + e.getMessage(), e);
         }
     }
 
     @Override
-    @Transactional
     public Usuario save(Usuario usuario) {
-        // Validação de usuário 
-        if (usuario == null) {
-            throw new RuntimeException("Dados do usuário não preenchidos.");
-        }
-        if (StringUtil.isNullOrEmpty(usuario.getNome())) {
-            throw new IllegalArgumentException("Nome do usuário não pode ser vazio.");
-        }
-        if (StringUtil.isNullOrEmpty(usuario.getCpf())) {
-            throw new IllegalArgumentException("CPF do usuário não pode ser vazio.");
-        }
-        // Valida CPF único
-        if (usuario.getId() == null && findByCpf(usuario.getCpf()).isPresent()) {
-            throw new RuntimeException("CPF já cadastrado.");
-        }
-
+        // Lógica de validação pode ser adicionada aqui.
         try {
-            log.info("Salvando/Atualizando usuário: {}", usuario.getNome());
-            // JpaRepository.save() lida com persistência (novo) e merge (existente)
+            // Salva o usuário no banco de dados. Funciona para criação e atualização.
             return usuarioRepository.save(usuario);
         } catch (RuntimeException e) {
-            log.error("Erro ao salvar/atualizar usuário {}: {}", usuario.getNome(), e.getMessage(), e);
-            throw new RuntimeException("Falha ao salvar/atualizar usuário", e);
+            throw new RuntimeException("Erro no service ao salvar ou atualizar o usuário: " + e.getMessage(), e);
         }
     }
 
     @Override
-    @Transactional
     public void delete(Usuario usuario) {
-        if (usuario == null || usuario.getId() == null) {
-            throw new IllegalArgumentException("Dados do usuário ou ID não preenchidos para remoção.");
-        }
-        // Verifica se o usuário existe antes de tentar remover
-        Usuario usuarioExistente = usuarioRepository.findById(usuario.getId()).orElse(null);
-        if (usuarioExistente == null) {
-            throw new RuntimeException("Usuário com ID " + usuario.getId() + " não encontrado para remoção.");
-        }
-
+        // Lógica de validação pode ser adicionada aqui.
         try {
-            log.info("Removendo usuário com ID: {}", usuario.getId());
-            usuarioRepository.delete(usuarioExistente);
+            // Deleta o usuário.
+            usuarioRepository.delete(usuario);
         } catch (RuntimeException e) {
-            log.error("Erro ao remover usuário com ID {}: {}", usuario.getId(), e.getMessage(), e);
-            throw new RuntimeException("Falha ao remover usuário", e);
+            throw new RuntimeException("Erro no service ao deletar o usuário: " + e.getMessage(), e);
         }
     }
-
-    
 }

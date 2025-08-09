@@ -8,18 +8,24 @@ import br.com.ifba.funcionario.entity.Funcionario;
 import java.util.List;
 import java.util.Optional;
 
+// Interface que define o contrato do controlador para as operações de Funcionário.
 public interface FuncionarioIController {
+    
+    // Método para salvar um novo funcionário.
+    Funcionario salvarFuncionario(Funcionario funcionario);
 
-    List<Funcionario> findAll();
-    
-    Optional<Funcionario> findById(Long id);
-    
-    List<Funcionario> findByNomeContaining(String nome);
-    
-    // Métodos para operações de CRUD
-    Funcionario save(Funcionario funcionario);
-    
-    Funcionario update(Funcionario funcionario);
-    
-    void delete(Long id); 
+    // Método para atualizar um funcionário existente.
+    Funcionario atualizarFuncionario(Funcionario funcionario);
+
+    // Método para deletar um funcionário.
+    void deletarFuncionario(Funcionario funcionario);
+
+    // Método para buscar um funcionário pelo seu ID.
+    Optional<Funcionario> buscarFuncionarioPorId(Long id);
+
+    // Método para buscar todos os funcionários.
+    List<Funcionario> buscarTodosFuncionarios();
+
+    // Método para buscar funcionários por parte do nome da pessoa associada.
+    List<Funcionario> buscarFuncionarioPorNome(String nome);
 }

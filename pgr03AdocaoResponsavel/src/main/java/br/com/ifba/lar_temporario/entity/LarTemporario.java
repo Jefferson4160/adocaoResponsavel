@@ -5,7 +5,7 @@
 package br.com.ifba.lar_temporario.entity;
 
 import br.com.ifba.infrastructure.entity.PersistenceEntity;
-import br.com.ifba.usuario.entity.Pessoa;
+import br.com.ifba.usuario.entity.ExcluirEstaClasse;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,7 +30,7 @@ public class LarTemporario extends PersistenceEntity{
     
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
-    Pessoa pessoa;
+    ExcluirEstaClasse pessoa;
 
     @Column(name = "quantidade_max_animais", nullable = false)
     private Integer quantidadeMaxAnimais;
