@@ -47,11 +47,11 @@ public class UsuarioController implements UsuarioIController {
     }
 
     @Override
-    public void deletarUsuario(Usuario usuario) {
+    public void deletarUsuario(Long id) {
         log.info("Recebendo solicitação para deletar usuário.");
         try {
             // Delega a exclusão ao serviço.
-            usuarioService.delete(usuario);
+            usuarioService.deleteById(id);
         } catch (RuntimeException e) {
             log.error("Erro ao deletar usuário: {}", e.getMessage());
             throw e;
@@ -115,5 +115,10 @@ public class UsuarioController implements UsuarioIController {
             log.error("Erro ao salvar novo usuário completo: {}", e.getMessage());
             throw e;
         }
+    }
+    
+    @Override
+    public Usuario atualizarUsuarioCompleto(Usuario usuarioAtualizado, String tipoUsuario, String areaAtuacao, String cargo, Double salario) {
+        return usuarioService.atualizarUsuarioCompleto(usuarioAtualizado, tipoUsuario, areaAtuacao, cargo, salario);
     }
 }

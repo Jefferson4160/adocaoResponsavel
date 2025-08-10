@@ -23,7 +23,7 @@ public interface UsuarioIController {
     Usuario atualizarUsuario(Usuario usuario);
     
     // Método para deletar um usuário.
-    void deletarUsuario(Usuario usuario);
+    void deletarUsuario(Long id);
     
     // Método para buscar um usuário pelo seu ID.
     Optional<Usuario> buscarUsuarioPorId(Long id);
@@ -38,4 +38,6 @@ public interface UsuarioIController {
     Optional<Usuario> buscarUsuarioPorCpf(String cpf);
     
     Usuario salvarNovoUsuarioCompleto(Pessoa pessoa, String perfilSelecionado, String tipoUsuario, String areaAtuacao, String cargo, Double salario);
+    
+    Usuario atualizarUsuarioCompleto(Usuario usuarioAtualizado, String tipoUsuario, String areaAtuacao, String cargo, Double salario);
 }

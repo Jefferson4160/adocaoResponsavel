@@ -72,7 +72,15 @@ public class Main extends javax.swing.JFrame {
         
         btnJefferson.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent evt) {
-                gerenciamentoUsuariosTela01.setVisible(true); 
+                gerenciamentoUsuariosTela01.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                        // Esta ação será executada quando a tela GerenciamentoUsuariosTela01 for fechada
+                        Main.this.setVisible(true);
+                    }
+                });
+
+                gerenciamentoUsuariosTela01.setVisible(true);
                 Main.this.setVisible(false);
             }
         });

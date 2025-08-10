@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import java.util.Optional;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -68,7 +69,7 @@ public class GerenciamentoUsuariosTela01 extends javax.swing.JFrame {
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         // --- Configuração da Tabela ---
-        String[] nomeColunas = {"Nome", "Tipo de usuário", "Telefone", "Editar", "Remover"};
+        String[] nomeColunas = {"ID", "Nome", "Perfil de usuário", "Telefone", "Editar", "Remover"};
         modeloTabelaUsuarios = new DefaultTableModel(nomeColunas, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -76,7 +77,7 @@ public class GerenciamentoUsuariosTela01 extends javax.swing.JFrame {
             }
             @Override
             public Class<?> getColumnClass(int columnIndex) {
-                if (columnIndex == 3 || columnIndex == 4) { // Editar e Remover
+                if (columnIndex == 4 || columnIndex == 5) { // Editar e Remover
                     return ImageIcon.class;
                 }
                 return super.getColumnClass(columnIndex);
@@ -86,18 +87,19 @@ public class GerenciamentoUsuariosTela01 extends javax.swing.JFrame {
 
         jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         TableColumnModel columnModel = jTable1.getColumnModel();
-        columnModel.getColumn(0).setPreferredWidth(250); // Nome
-        columnModel.getColumn(1).setPreferredWidth(150); // Tipo de usuário
-        columnModel.getColumn(2).setPreferredWidth(150); // Telefone
-        columnModel.getColumn(3).setPreferredWidth(70);  // Editar
-        columnModel.getColumn(4).setPreferredWidth(70);  // Remover
+        columnModel.getColumn(0).setPreferredWidth(50);
+        columnModel.getColumn(1).setPreferredWidth(250); // Nome
+        columnModel.getColumn(2).setPreferredWidth(150); // Tipo de usuário
+        columnModel.getColumn(3).setPreferredWidth(150); // Telefone
+        columnModel.getColumn(4).setPreferredWidth(70);  // Editar
+        columnModel.getColumn(5).setPreferredWidth(70);  // Remover
         jTable1.setRowHeight(30);
 
         // --- Configuração dos Renderizadores e Ícones ---
         ImageIcon iconeLixeira = new ImageIcon(getClass().getResource("/images/icons8-lixeira-25.png"));
         ImageIcon iconeLapis = new ImageIcon(getClass().getResource("/images/icons8-editar-25.png"));
-        columnModel.getColumn(3).setCellRenderer(new Redenrizador(iconeLapis));
-        columnModel.getColumn(4).setCellRenderer(new Redenrizador(iconeLixeira));
+        columnModel.getColumn(4).setCellRenderer(new Redenrizador(iconeLapis));
+        columnModel.getColumn(5).setCellRenderer(new Redenrizador(iconeLixeira));
 
         // --- AÇÃO DE CLIQUE NA TABELA ---
         jTable1.addMouseListener(new MouseAdapter() {
@@ -107,13 +109,13 @@ public class GerenciamentoUsuariosTela01 extends javax.swing.JFrame {
                 int row = jTable1.rowAtPoint(e.getPoint());
 
                 if (row >= 0 && column >= 0) {
-                    Long pessoaId = (Long) modeloTabelaUsuarios.getValueAt(row, 0); // Supondo que a primeira coluna (agora oculta) tenha o ID
+                    Long pessoaId = (Long) modeloTabelaUsuarios.getValueAt(row, 0); // a primeira coluna (agora oculta) tem o ID
                     String clickedColumnName = jTable1.getColumnName(column);
 
                     if (clickedColumnName.equals("Remover")) {
-                        // Lógica de remoção
+                        removerUsuario(pessoaId);
                     } else if (clickedColumnName.equals("Editar")) {
-                        // Lógica de edição
+                        abrirTelaEdicao(pessoaId);
                     }
                 }
             }
@@ -172,6 +174,7 @@ public class GerenciamentoUsuariosTela01 extends javax.swing.JFrame {
                 }
                 
                 modeloTabelaUsuarios.addRow(new Object[]{
+                    usuario.getId(),
                     usuario.getNome(), // Acessamos o nome diretamente do objeto Usuario (herança)
                     tipoUsuario,
                     usuario.getTelefone(), // Acessamos o telefone diretamente (herança)
@@ -185,7 +188,97 @@ public class GerenciamentoUsuariosTela01 extends javax.swing.JFrame {
     }
     
     private void realizarBuscaUsuarios() {
-        // ... (lógica de busca a ser implementada) ...
+       String termoBusca = jTextField1.getText().trim();
+        modeloTabelaUsuarios.setRowCount(0);
+
+        if (termoBusca.isEmpty() || termoBusca.equals("Busca por nome ou cpf")) {
+            carregarUsuariosNaTabela();
+            return;
+        }
+
+        try {
+            List<Usuario> usuariosEncontrados;
+
+            // Verifica se o termo de busca parece ser um CPF (somente números)
+            if (termoBusca.matches("\\d+")) {
+                Optional<Usuario> usuarioOpt = usuarioController.buscarUsuarioPorCpf(termoBusca);
+                if (usuarioOpt.isPresent()) {
+                    usuariosEncontrados = List.of(usuarioOpt.get());
+                } else {
+                    usuariosEncontrados = List.of();
+                }
+            } else {
+                // Se não for CPF, busca por nome
+                usuariosEncontrados = usuarioController.buscarUsuarioPorNome(termoBusca);
+            }
+
+            if (!usuariosEncontrados.isEmpty()) {
+                for (Usuario usuario : usuariosEncontrados) {
+                    String tipoUsuario = "Sem Perfil";
+                    if (usuario.getPerfilDeUsuario() != null) {
+                        tipoUsuario = usuario.getPerfilDeUsuario().getNomeDoPerfil();
+                    }
+
+                    modeloTabelaUsuarios.addRow(new Object[]{
+                        usuario.getId(),
+                        usuario.getNome(),
+                        tipoUsuario,
+                        usuario.getTelefone(),
+                        null,
+                        null
+                    });
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Nenhum usuário encontrado.", "Busca", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao realizar a busca: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void removerUsuario(Long usuarioId) {
+        int confirm = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir este usuário? Esta ação é irreversível.", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                // Chama o método para deletar o usuário
+                usuarioController.deletarUsuario(usuarioId);
+                carregarUsuariosNaTabela();
+                JOptionPane.showMessageDialog(this, "Usuário excluído com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(this, "Erro ao excluir usuário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    private void abrirTelaEdicao(Long usuarioId) {
+        try {
+            Optional<Usuario> usuarioParaEditarOpt = usuarioController.buscarUsuarioPorId(usuarioId);
+
+            if (usuarioParaEditarOpt.isPresent()) {
+                Usuario usuarioParaEditar = usuarioParaEditarOpt.get();
+
+                TelaEdicaoUsuario telaEdicao = new TelaEdicaoUsuario(this, true,
+                    usuarioParaEditar,
+                    perfilDeUsuarioController,
+                    adotanteController,
+                    funcionarioController,
+                    voluntarioController,
+                    usuarioController
+                );
+                telaEdicao.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                        carregarUsuariosNaTabela(); // Recarrega a tabela principal após a edição
+                    }
+                });
+                telaEdicao.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuário não encontrado para edição.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao carregar dados do usuário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void adicionarListenersDeBusca() {
@@ -270,14 +363,15 @@ public class GerenciamentoUsuariosTela01 extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnPerfis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnNovoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(50, 50, 50))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,9 +382,9 @@ public class GerenciamentoUsuariosTela01 extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnPerfis)
-                .addGap(26, 26, 26)
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addContainerGap())
         );
 
         pack();
@@ -310,40 +404,7 @@ public class GerenciamentoUsuariosTela01 extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnPerfisActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GerenciamentoUsuariosTela01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GerenciamentoUsuariosTela01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GerenciamentoUsuariosTela01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GerenciamentoUsuariosTela01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GerenciamentoUsuariosTela01().setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnNovoUsuario;

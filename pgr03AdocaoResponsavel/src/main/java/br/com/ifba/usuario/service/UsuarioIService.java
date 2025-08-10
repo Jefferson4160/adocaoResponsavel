@@ -32,5 +32,9 @@ public interface UsuarioIService {
     // Método para deletar um usuário passando o objeto.
     void delete(Usuario usuario);
     
+    void deleteById(Long id);
+    
     Usuario salvarNovoUsuarioCompleto(Pessoa pessoa, String perfilSelecionado, String tipoUsuario, String areaAtuacao, String cargo, Double salario);
+    
+    Usuario atualizarUsuarioCompleto(Usuario usuarioAtualizado, String tipoUsuario, String areaAtuacao, String cargo, Double salario);
 }

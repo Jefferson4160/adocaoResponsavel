@@ -193,4 +193,41 @@ public class UsuarioService implements UsuarioIService {
             throw e;
         }
     }
+    
+    @Override
+    public void deleteById(Long id) {
+        try {
+            usuarioRepository.deleteById(id);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Erro no service ao deletar o usuário: " + e.getMessage(), e);
+        }
+    }
+    
+    @Transactional
+    @Override
+    public Usuario atualizarUsuarioCompleto(Usuario usuarioAtualizado, String tipoUsuario, String areaAtuacao, String cargo, Double salario) {
+        log.info("Iniciando atualização completa do usuário com ID: {}", usuarioAtualizado.getId());
+        try {
+            // 1. Atualizar o Usuario (que agora é a Pessoa também)
+            Usuario usuarioSalvo = usuarioRepository.save(usuarioAtualizado);
+
+            // 2. Buscar a entidade específica e atualizar seus campos
+            if (usuarioSalvo instanceof Voluntario) {
+                Voluntario voluntario = (Voluntario) usuarioSalvo;
+                voluntario.setAreaDeAtuacao(areaAtuacao);
+                voluntarioRepository.save(voluntario);
+            } else if (usuarioSalvo instanceof Funcionario) {
+                Funcionario funcionario = (Funcionario) usuarioSalvo;
+                funcionario.setCargo(cargo);
+                funcionario.setSalario(salario);
+                funcionarioRepository.save(funcionario);
+            } // Adotante não precisa ser atualizado, pois não tem campos específicos
+
+            log.info("Atualização concluída para o usuário: {}", usuarioAtualizado.getNome());
+            return usuarioSalvo;
+        } catch (RuntimeException e) {
+            log.error("Erro fatal ao atualizar o usuário. Transação será revertida: {}", e.getMessage());
+            throw e;
+        }
+    }
 }
