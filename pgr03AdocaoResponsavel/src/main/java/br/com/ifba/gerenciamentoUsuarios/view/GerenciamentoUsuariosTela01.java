@@ -12,6 +12,7 @@ import br.com.ifba.pessoa.entity.Pessoa;
 import br.com.ifba.usuario.controller.AdotanteIController;
 import br.com.ifba.usuario.controller.FuncionarioIController;
 import br.com.ifba.usuario.controller.VoluntarioIController;
+import br.com.ifba.usuario.entity.Usuario;
 import br.com.ifba.usuario.view.render.Redenrizador;
 import jakarta.annotation.PostConstruct;
 import java.awt.event.ActionEvent;
@@ -162,18 +163,18 @@ public class GerenciamentoUsuariosTela01 extends javax.swing.JFrame {
         modeloTabelaUsuarios.setRowCount(0);
         try {
             // Buscamos todas as pessoas usando o controlador correto
-            List<Pessoa> todasPessoas = pessoaController.buscarTodasPessoas();
-            for (Pessoa pessoa : todasPessoas) {
+            List<Usuario> todosUsuarios = usuarioController.buscarTodosUsuarios();
+            for (Usuario usuario : todosUsuarios) {
                 // Aqui, precisamos identificar o tipo de usuário e o seu perfil
                 String tipoUsuario = "Sem Perfil";
-                if (pessoa.getUsuario() != null && pessoa.getUsuario().getPerfilDeUsuario() != null) {
-                    tipoUsuario = pessoa.getUsuario().getPerfilDeUsuario().getNomeDoPerfil();
+                if (usuario.getPerfilDeUsuario() != null) {
+                    tipoUsuario = usuario.getPerfilDeUsuario().getNomeDoPerfil();
                 }
                 
                 modeloTabelaUsuarios.addRow(new Object[]{
-                    pessoa.getNome(),
+                    usuario.getNome(), // Acessamos o nome diretamente do objeto Usuario (herança)
                     tipoUsuario,
-                    pessoa.getTelefone(),
+                    usuario.getTelefone(), // Acessamos o telefone diretamente (herança)
                     null, // Coluna Editar
                     null  // Coluna Remover
                 });

@@ -4,6 +4,7 @@
  */
 package br.com.ifba.usuario.controller;
 
+import br.com.ifba.pessoa.entity.Pessoa;
 import br.com.ifba.usuario.service.UsuarioIService;
 import br.com.ifba.usuario.entity.Usuario;
 import java.util.List;
@@ -101,6 +102,17 @@ public class UsuarioController implements UsuarioIController {
             return usuarioService.findByCpf(cpf);
         } catch (RuntimeException e) {
             log.error("Erro ao buscar usuário por CPF: {}", e.getMessage());
+            throw e;
+        }
+    }
+    
+    @Override
+    public Usuario salvarNovoUsuarioCompleto(Pessoa pessoa, String perfilSelecionado, String tipoUsuario, String areaAtuacao, String cargo, Double salario) {
+        log.info("Recebendo solicitação para salvar novo usuário completo.");
+        try {
+            return usuarioService.salvarNovoUsuarioCompleto(pessoa, perfilSelecionado, tipoUsuario, areaAtuacao, cargo, salario);
+        } catch (RuntimeException e) {
+            log.error("Erro ao salvar novo usuário completo: {}", e.getMessage());
             throw e;
         }
     }

@@ -4,27 +4,24 @@
  */
 package br.com.ifba.adotante.entity;
 
-import br.com.ifba.pessoa.entity.Pessoa;
+import br.com.ifba.usuario.entity.Usuario;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.PrimaryKeyJoinColumn; 
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor; 
-import lombok.Data;             
-import lombok.NoArgsConstructor; 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
 
-/**
- * Classe que representa um Adotante, herdando de Usuario.
- * @author Jefferson S
- */
-@Entity // Uma entidade gerenciada pelo JPA
-@Table(name = "tb_adotante") // Mapeia para a tabela específica de adotantes
-@Data // Gera getters, setters, equals, hashCode, toString
-@AllArgsConstructor // Gera construtor com todos os atributos
-@NoArgsConstructor // Gera construtor vazio
-@PrimaryKeyJoinColumn(name = "id_usuario") // Define a coluna de junção com a tabela pai (tb_usuario)
-
-public class Adotante extends Pessoa {
+@Entity
+@Table(name = "tb_adotante")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true) // Importante para herança
+@PrimaryKeyJoinColumn(name = "id") 
+public class Adotante extends Usuario {
 
     @Column(name = "historico_animal", columnDefinition = "TEXT")
     private String historicoDoAnimal;

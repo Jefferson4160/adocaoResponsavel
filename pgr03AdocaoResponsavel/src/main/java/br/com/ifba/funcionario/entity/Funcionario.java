@@ -4,29 +4,24 @@
  */
 package br.com.ifba.funcionario.entity;
 
-import br.com.ifba.pessoa.entity.Pessoa;
+import br.com.ifba.usuario.entity.Usuario;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-
-/**
- * Classe que representa um Funcionário, herdando de Usuario.
- * @author Jefferson S
- */
-@Entity // Uma entidade gerenciada pelo JPA
-@Table(name = "tb_funcionario") // Mapeia para a tabela específica de funcionários
-@Data // Gera getters, setters, equals, hashCode, toString
-@AllArgsConstructor // Gera construtor com todos os atributos
-@NoArgsConstructor // Gera construtor vazio
-@PrimaryKeyJoinColumn(name = "id_usuario") // Define a coluna de junção com a tabela pai (tb_usuario)
-
-
-public class Funcionario extends Pessoa {
+@Entity
+@Table(name = "tb_funcionario")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true) // Importante para herança
+@PrimaryKeyJoinColumn(name = "id") // Associa a PK do Funcionario à PK do Usuario
+public class Funcionario extends Usuario {
 
     @Column(name = "cargo", nullable = false, length = 50)
     private String cargo;

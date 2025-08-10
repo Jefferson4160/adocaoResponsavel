@@ -22,5 +22,9 @@ public interface PerfilDeUsuarioIController {
     // Métodos de busca
     Optional<PerfilDeUsuario> buscarPerfilPorId(Long id);
     List<PerfilDeUsuario> buscarTodosPerfis();
-    List<PerfilDeUsuario> buscarPorNome(String nome);
+    // Método para busca genérica (busca perfis que contêm o termo)
+    List<PerfilDeUsuario> buscarPorNome(String termo);
+
+    // Método para busca exata (busca um único perfil com o nome exato)
+    Optional<PerfilDeUsuario> buscarPorNomeExato(String nomeDoPerfil);
 }

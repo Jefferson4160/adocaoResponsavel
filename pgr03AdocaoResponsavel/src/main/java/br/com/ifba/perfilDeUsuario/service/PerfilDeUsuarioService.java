@@ -81,4 +81,17 @@ public class PerfilDeUsuarioService implements PerfilDeUsuarioIService {
         log.info("Buscando perfis por nome: {}", nome);
         return perfilDeUsuarioRepository.findByNomeDoPerfilContainingIgnoreCase(nome);
     }
+    
+    @Override
+    public Optional<PerfilDeUsuario> findByNome(String nomeDoPerfil) {
+        log.info("Recebendo solicitação de serviço para buscar perfil por nome: {}", nomeDoPerfil);
+        try {
+            // A camada de serviço chama o repositório para fazer a busca no banco de dados.
+            // O Spring Data JPA cria a implementação do findByNomeDoPerfil para você!
+            return perfilDeUsuarioRepository.findByNomeDoPerfil(nomeDoPerfil);
+        } catch (RuntimeException e) {
+            log.error("Erro no serviço ao buscar perfil por nome: {}", e.getMessage());
+            throw e;
+        }
+    }
 }

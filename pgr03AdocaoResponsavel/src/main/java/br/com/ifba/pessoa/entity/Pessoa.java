@@ -6,23 +6,22 @@
 package br.com.ifba.pessoa.entity;
 
 import br.com.ifba.infrastructure.entity.PersistenceEntity;
-import br.com.ifba.usuario.entity.Usuario;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Table(name = "tb_pessoa")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true) // Importante para herança
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Pessoa extends PersistenceEntity {
 
@@ -44,10 +43,6 @@ public class Pessoa extends PersistenceEntity {
     @Column(name = "cidade", nullable = false, length = 50)
     private String cidade;
 
-    @Column(name = "estado", nullable = false, length = 2)
+    @Column(name = "estado", nullable = false, length = 15)
     private String estado;
-    
-    // Relacionamento com a classe Usuario, a ser criada
-    @OneToOne(mappedBy = "pessoa", cascade = CascadeType.ALL)
-    private Usuario usuario;
 }

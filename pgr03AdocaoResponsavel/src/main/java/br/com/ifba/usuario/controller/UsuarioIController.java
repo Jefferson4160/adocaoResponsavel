@@ -4,6 +4,7 @@
  */
 package br.com.ifba.usuario.controller;
 
+import br.com.ifba.pessoa.entity.Pessoa;
 import br.com.ifba.usuario.entity.Usuario;
 import java.util.List;
 import java.util.Optional;
@@ -35,4 +36,6 @@ public interface UsuarioIController {
     
     // Método para buscar um usuário por CPF.
     Optional<Usuario> buscarUsuarioPorCpf(String cpf);
+    
+    Usuario salvarNovoUsuarioCompleto(Pessoa pessoa, String perfilSelecionado, String tipoUsuario, String areaAtuacao, String cargo, Double salario);
 }

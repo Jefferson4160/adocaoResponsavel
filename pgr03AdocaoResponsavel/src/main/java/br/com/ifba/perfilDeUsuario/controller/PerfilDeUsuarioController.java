@@ -84,14 +84,27 @@ public class PerfilDeUsuarioController implements PerfilDeUsuarioIController {
         }
     }
     
+    
     @Override
-    public List<PerfilDeUsuario> buscarPorNome(String nome) {
-        log.info("Recebendo solicitação para buscar perfis por nome: {}", nome);
+    public List<PerfilDeUsuario> buscarPorNome(String termo) {
+        log.info("Recebendo solicitação para buscar perfis por nome contendo: {}", termo);
         try {
-            return perfilDeUsuarioService.findByNomeContaining(nome); // Chama o serviço
+            return perfilDeUsuarioService.findByNomeContaining(termo); 
         } catch (RuntimeException e) {
             log.error("Erro ao buscar perfis por nome: {}", e.getMessage());
             throw e;
         }
     }
+    
+    @Override
+    public Optional<PerfilDeUsuario> buscarPorNomeExato(String nomeDoPerfil) {
+        log.info("Recebendo solicitação para buscar perfil com nome exato: {}", nomeDoPerfil);
+        try {
+            return perfilDeUsuarioService.findByNome(nomeDoPerfil);
+        } catch (RuntimeException e) {
+            log.error("Erro ao buscar perfil por nome exato: {}", e.getMessage());
+            throw e;
+        }
+    }
+    
 }

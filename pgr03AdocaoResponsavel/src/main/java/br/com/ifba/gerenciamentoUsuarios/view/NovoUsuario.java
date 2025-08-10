@@ -116,84 +116,72 @@ public class NovoUsuario extends javax.swing.JDialog {
         }
     }
     
-    // Em br.com.ifba.gerenciamentoUsuarios.view.NovoUsuario.java
-private void salvarNovoUsuario(ActionEvent evt) {
-    try {
-        String tipoSelecionado = (String) boxTipoUsuario.getSelectedItem();
-        String perfilSelecionadoNome = (String) boxPerfil.getSelectedItem();
+    
+    private void salvarNovoUsuario(ActionEvent evt) {
+        // 1. Coletar e validar os dados dos campos
+        String nome = textNome.getText().trim();
+        String cpf = textCpf.getText().trim();
+        String email = textEmail.getText().trim();
+        String telefone = textTelefone.getText().trim();
+        String endereco = textEndereco.getText().trim();
+        String cidade = textCidade.getText().trim();
+        String estado = textEstado.getText().trim();
+        String tipoUsuarioSelecionado = (String) boxTipoUsuario.getSelectedItem();
+        String perfilSelecionado = (String) boxPerfil.getSelectedItem();
 
-        // 1. Busque o perfil de usuário
-        Optional<PerfilDeUsuario> perfilOpt = perfilDeUsuarioController.buscarPorNome(perfilSelecionadoNome).stream().findFirst();
-        if (perfilOpt.isEmpty()) {
-            throw new RuntimeException("Perfil de usuário não encontrado.");
-        }
-        PerfilDeUsuario perfil = perfilOpt.get();
-
-        // 2. Cria a entidade Pessoa
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome(textNome.getText());
-        pessoa.setCpf(textCpf.getText());
-        pessoa.setEmail(textEmail.getText());
-        pessoa.setTelefone(textTelefone.getText());
-        pessoa.setEndereco(textEndereco.getText());
-        pessoa.setCidade(textCidade.getText());
-        pessoa.setEstado(textEstado.getText());
-
-        // 3. Cria o Usuario e o associa à Pessoa
-        Usuario novoUsuario = new Usuario();
-        novoUsuario.setPessoa(pessoa);
-        novoUsuario.setPerfilDeUsuario(perfil);
-
-        // 4. Salva a subclasse diretamente
-        switch (tipoSelecionado) {
-            case "Adotante":
-                Adotante adotante = new Adotante();
-                adotante.setNome(pessoa.getNome());
-                adotante.setCpf(pessoa.getCpf());
-                adotante.setEmail(pessoa.getEmail());
-                adotante.setTelefone(pessoa.getTelefone());
-                adotante.setEndereco(pessoa.getEndereco());
-                adotante.setCidade(pessoa.getCidade());
-                adotante.setEstado(pessoa.getEstado());
-                adotante.setUsuario(novoUsuario);
-                adotanteController.salvarAdotante(adotante);
-                break;
-            case "Voluntário":
-                Voluntario voluntario = new Voluntario();
-                voluntario.setNome(pessoa.getNome());
-                voluntario.setCpf(pessoa.getCpf());
-                voluntario.setEmail(pessoa.getEmail());
-                voluntario.setTelefone(pessoa.getTelefone());
-                voluntario.setEndereco(pessoa.getEndereco());
-                voluntario.setCidade(pessoa.getCidade());
-                voluntario.setEstado(pessoa.getEstado());
-                voluntario.setAreaDeAtuacao(textArea.getText());
-                voluntario.setUsuario(novoUsuario);
-                voluntarioController.salvarVoluntario(voluntario);
-                break;
-            case "Funcionário":
-                Funcionario funcionario = new Funcionario();
-                funcionario.setNome(pessoa.getNome());
-                funcionario.setCpf(pessoa.getCpf());
-                funcionario.setEmail(pessoa.getEmail());
-                funcionario.setTelefone(pessoa.getTelefone());
-                funcionario.setEndereco(pessoa.getEndereco());
-                funcionario.setCidade(pessoa.getCidade());
-                funcionario.setEstado(pessoa.getEstado());
-                funcionario.setCargo(textCargo.getText());
-                funcionario.setSalario(Double.parseDouble(textSalario.getText().replace(",", ".")));
-                funcionario.setUsuario(novoUsuario);
-                funcionarioController.salvarFuncionario(funcionario);
-                break;
+        if (nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || telefone.isEmpty() || endereco.isEmpty() || cidade.isEmpty() || estado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos obrigatórios.", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
-        JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-        dispose();
+        // Validações adicionais para os tipos específicos
+        String areaAtuacao = "";
+        String cargo = "";
+        Double salario = null;
 
-    } catch (RuntimeException e) {
-        JOptionPane.showMessageDialog(this, "Erro ao salvar usuário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        if ("Voluntário".equals(tipoUsuarioSelecionado)) {
+            if (textArea.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, preencha a área de atuação do voluntário.", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            areaAtuacao = textArea.getText().trim();
+        } else if ("Funcionário".equals(tipoUsuarioSelecionado)) {
+            if (textCargo.getText().trim().isEmpty() || textSalario.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, preencha o cargo e o salário do funcionário.", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            cargo = textCargo.getText().trim();
+            try {
+                salario = Double.parseDouble(textSalario.getText().trim().replace(",", "."));
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "O salário deve ser um número válido. Ex: 4000,00", "Erro de Formato", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        try {
+            // AQUI ESTÁ A MUDANÇA: Criamos a Pessoa e passamos todos os dados para o serviço
+            Pessoa pessoa = new Pessoa();
+            pessoa.setNome(nome);
+            pessoa.setCpf(cpf);
+            pessoa.setEmail(email);
+            pessoa.setTelefone(telefone);
+            pessoa.setEndereco(endereco);
+            pessoa.setCidade(cidade);
+            pessoa.setEstado(estado);
+
+            // Chamamos o NOVO MÉTODO DO SERVIÇO que faz todas as operações em UMA ÚNICA TRANSAÇÃO
+            usuarioController.salvarNovoUsuarioCompleto(pessoa, perfilSelecionado, tipoUsuarioSelecionado, areaAtuacao, cargo, salario);
+
+            // 6. Mensagem de sucesso e fechar a tela
+            JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar o usuário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
-}
+
    
     
     

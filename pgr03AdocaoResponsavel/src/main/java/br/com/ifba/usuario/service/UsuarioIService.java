@@ -4,6 +4,7 @@
  */
 package br.com.ifba.usuario.service;
 
+import br.com.ifba.pessoa.entity.Pessoa;
 import br.com.ifba.usuario.entity.Usuario; 
 import java.util.List;
 import java.util.Optional;
@@ -30,4 +31,6 @@ public interface UsuarioIService {
     
     // Método para deletar um usuário passando o objeto.
     void delete(Usuario usuario);
+    
+    Usuario salvarNovoUsuarioCompleto(Pessoa pessoa, String perfilSelecionado, String tipoUsuario, String areaAtuacao, String cargo, Double salario);
 }

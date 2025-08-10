@@ -26,4 +26,6 @@ public interface PerfilDeUsuarioIService {
     List<PerfilDeUsuario> findAll();
     
     List<PerfilDeUsuario> findByNomeContaining(String nome);
+    
+    Optional<PerfilDeUsuario> findByNome(String nomeDoPerfil);
 }
