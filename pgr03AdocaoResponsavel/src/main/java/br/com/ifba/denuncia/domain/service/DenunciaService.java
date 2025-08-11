@@ -54,4 +54,9 @@ public class DenunciaService implements IDenunciaService {
     public List<Denuncia> findByCpf(String cpf) {
         return denunciaRepository.findByDenunciadoCpf(cpf);
     }
+    
+    @Override
+    public List<Denuncia> findByAdotanteId(Long id) {
+        return denunciaRepository.findByDenunciadoId(id);
+    }
 }

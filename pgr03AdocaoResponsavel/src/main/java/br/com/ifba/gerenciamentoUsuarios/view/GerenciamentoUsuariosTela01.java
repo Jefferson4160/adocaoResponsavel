@@ -7,6 +7,7 @@ package br.com.ifba.gerenciamentoUsuarios.view;
 import br.com.ifba.perfilDeUsuario.controller.PerfilDeUsuarioIController;
 import br.com.ifba.usuario.controller.UsuarioIController;
 
+import br.com.ifba.denuncia.view.TelaDeDenuncias;
 import br.com.ifba.pessoa.controller.PessoaIController;
 import br.com.ifba.pessoa.entity.Pessoa;
 import br.com.ifba.usuario.controller.AdotanteIController;
@@ -55,6 +56,8 @@ public class GerenciamentoUsuariosTela01 extends javax.swing.JFrame {
     private VoluntarioIController voluntarioController;
     @Autowired
     private AdotanteIController adotanteController;
+    @Autowired
+    private TelaDeDenuncias telaDeDenuncias;
     
 
     private DefaultTableModel modeloTabelaUsuarios;
@@ -154,6 +157,10 @@ public class GerenciamentoUsuariosTela01 extends javax.swing.JFrame {
             }
         });
 
+        btnVerDenuncias.addActionListener(e -> {
+        telaDeDenuncias.setVisible(true);
+        });
+        
         // --- Lógica de busca e carregamento inicial ---
         adicionarListenersDeBusca();
         carregarUsuariosNaTabela();
@@ -319,6 +326,7 @@ public class GerenciamentoUsuariosTela01 extends javax.swing.JFrame {
         btnNovoUsuario = new javax.swing.JToggleButton();
         btnPerfis = new javax.swing.JToggleButton();
         jTextField1 = new javax.swing.JTextField();
+        btnVerDenuncias = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -356,22 +364,26 @@ public class GerenciamentoUsuariosTela01 extends javax.swing.JFrame {
             }
         });
 
+        btnVerDenuncias.setText("Ver Denúncias");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnPerfis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnNovoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(50, 50, 50))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnNovoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVerDenuncias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,9 +394,14 @@ public class GerenciamentoUsuariosTela01 extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnPerfis)
-                .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVerDenuncias)))
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -409,6 +426,7 @@ public class GerenciamentoUsuariosTela01 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnNovoUsuario;
     private javax.swing.JToggleButton btnPerfis;
+    private javax.swing.JToggleButton btnVerDenuncias;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
