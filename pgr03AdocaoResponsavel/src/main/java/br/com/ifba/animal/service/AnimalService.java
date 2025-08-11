@@ -6,6 +6,7 @@ package br.com.ifba.animal.service;
 
 import br.com.ifba.animal.entity.Animal;
 import br.com.ifba.animal.repository.AnimalRepository;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -44,8 +45,12 @@ public class AnimalService implements AnimalIService{
             log.info("Idade do animal inválida.");
             throw new RuntimeException("A idade do animal deve ser maior ou igual a 0.");
         }
+            
+        if (animal.getDataCadastro() == null) {
+                animal.setDataCadastro(LocalDateTime.now());
+            }
         
-               Animal salvo = animalRepository.save(animal);
+        Animal salvo = animalRepository.save(animal);
         log.info("Animal salvo com sucesso: {}", salvo);
         return salvo;
     }

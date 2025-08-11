@@ -26,34 +26,39 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="643" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+              <EmptySpace pref="91" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnAdicionarAnimal" max="32767" attributes="0"/>
-                          <Component id="btnEditarAnimal" alignment="1" min="-2" pref="164" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="btnRemoverAnimal" alignment="1" min="-2" pref="164" max="-2" attributes="0"/>
+                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btnAdicionarAnimal" max="32767" attributes="0"/>
+                      <Component id="btnEditarAnimal" alignment="1" min="-2" pref="164" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="btnAtualizar" min="-2" pref="61" max="-2" attributes="0"/>
+                  <Component id="btnRemoverAnimal" alignment="1" min="-2" pref="164" max="-2" attributes="0"/>
+                  <Component id="btnMaisDetalhes" alignment="1" min="-2" pref="164" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="74" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="302" max="-2" attributes="0"/>
+              <Component id="lblTituloDaPagina" min="-2" pref="160" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="66" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblTituloDaPagina" pref="46" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="btnAtualizar" min="-2" pref="42" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                       <Component id="btnAdicionarAnimal" min="-2" pref="49" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnEditarAnimal" min="-2" pref="44" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnRemoverAnimal" min="-2" pref="49" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnMaisDetalhes" min="-2" pref="48" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" min="-2" pref="393" max="-2" attributes="0"/>
               </Group>
@@ -70,7 +75,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTableAnimaisCadastrados">
+        <Component class="javax.swing.JTable" name="jtblTabelaAnimais">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="7" rowCount="0">
@@ -153,12 +158,17 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoverAnimalActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAtualizar">
+    <Component class="javax.swing.JLabel" name="lblTituloDaPagina">
       <Properties>
-        <Property name="text" type="java.lang.String" value="\ud83d\udd04" containsInvalidXMLChars="true"/>
+        <Property name="text" type="java.lang.String" value="ANIMAIS CADASTRADOS"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnMaisDetalhes">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Mais Detalhes"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAtualizarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMaisDetalhesActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
