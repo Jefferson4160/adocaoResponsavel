@@ -4,6 +4,7 @@
  */
 package br.com.ifba.app.view;
 
+import br.com.ifba.agendaDeVacina.view.TelaAgendaDeVacinas;
 import br.com.ifba.usuario.controller.UsuarioIController;
 
 import br.com.ifba.animal.view.AnimalView;
@@ -31,6 +32,8 @@ public class Main extends javax.swing.JFrame {
     @Lazy
     @Autowired
     private GerenciamentoUsuariosTela01 gerenciamentoUsuariosTela01;
+    @Autowired
+    private TelaAgendaDeVacinas telaAgendaDeVacinas;
     
     /**
      * Creates new form Main
@@ -84,6 +87,13 @@ public class Main extends javax.swing.JFrame {
                 Main.this.setVisible(false);
             }
         });
+        
+        btnJeffersonVacinas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                telaAgendaDeVacinas.setVisible(true);
+                //GerenciamentoUsuariosTela01.this.setVisible(false);
+            }
+        });
 
         // Configuração de fechamento da janela
         this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE); // Garante que a aplicação feche
@@ -129,6 +139,7 @@ public class Main extends javax.swing.JFrame {
         btnLuis = new javax.swing.JButton();
         btnRodrigo = new javax.swing.JButton();
         btnJefferson = new javax.swing.JButton();
+        btnJeffersonVacinas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,18 +163,27 @@ public class Main extends javax.swing.JFrame {
 
         btnJefferson.setText("Gestão de Usuários (Jefferson)");
 
+        btnJeffersonVacinas.setText("Agenda de Vacinas (Jefferson)");
+        btnJeffersonVacinas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJeffersonVacinasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(75, 75, 75)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnInque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLarTemporarioLuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLuis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRodrigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnJefferson, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnJeffersonVacinas, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnInque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLarTemporarioLuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLuis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRodrigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnJefferson, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -179,7 +199,9 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(btnRodrigo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnJefferson)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnJeffersonVacinas)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -200,11 +222,16 @@ public class Main extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnRodrigoActionPerformed
 
+    private void btnJeffersonVacinasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJeffersonVacinasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnJeffersonVacinasActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInque;
     private javax.swing.JButton btnJefferson;
+    private javax.swing.JButton btnJeffersonVacinas;
     private javax.swing.JButton btnLarTemporarioLuan;
     private javax.swing.JButton btnLuis;
     private javax.swing.JButton btnRodrigo;
