@@ -6,6 +6,7 @@
 package br.com.ifba.registro_interesse.entity;
 
 import br.com.ifba.animal.entity.Animal;
+import br.com.ifba.pessoa.entity.Pessoa; //depois mudar
 import br.com.ifba.infrastructure.entity.PersistenceEntity;
 import br.com.ifba.usuario.entity.ExcluirEstaClasse;
 import jakarta.persistence.Column;
@@ -33,7 +34,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RegistroInteresse extends PersistenceEntity{
     
-    @OneToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
     ExcluirEstaClasse pessoa;
     
@@ -48,11 +49,5 @@ public class RegistroInteresse extends PersistenceEntity{
     @Column(name = "questionário", columnDefinition = "TEXT")
     private String questionario;
 
-    public void setDataRegistro(LocalDateTime now) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public Object getStatusInteresse() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 }
