@@ -5,8 +5,10 @@
 package br.com.ifba.lar_temporario.service;
 
 
+import br.com.ifba.animal.repository.AnimalRepository;
 import br.com.ifba.lar_temporario.entity.LarTemporario;
 import br.com.ifba.lar_temporario.repository.LarTemporarioRepository;
+import br.com.ifba.usuario.repository.UsuarioRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -24,18 +26,26 @@ public class LarTemporarioService implements LarTemporarioIService {
 
     @Autowired
     private final LarTemporarioRepository larTemporarioRepository;
+    
+    @Autowired
+    private final UsuarioRepository usuarioRepository;
+    
+    @Autowired
+    private final AnimalRepository animalRepository;
 
     private static final Logger log = LoggerFactory.getLogger(LarTemporarioService.class);
 
     @Override
     public LarTemporario save(LarTemporario lar) throws RuntimeException {
         log.info("Tentando salvar Lar Temporário: {}", lar);
-
-        if (lar == null || lar.getPessoa() == null) {
-            log.info("Tentativa de salvar lar nulo ou sem pessoa.");
-            throw new RuntimeException("Dados do lar não preenchidos.");
+        
+        if(lar == null || lar.getUsuario() == null){
+            throw new RuntimeException("Dados do lar ou usuario não preenchidos.");
         }
-
+        
+        usuarioRepository.findById(lar.getUsuario().getId());
+        log.info("Usuario encontrado no banco !");
+        
         if (lar.getId() != null && larTemporarioRepository.existsById(lar.getId())) {
             log.info("Tentativa de salvar lar já existente com ID: {}", lar.getId());
             throw new RuntimeException("Lar já existente no banco de dados.");

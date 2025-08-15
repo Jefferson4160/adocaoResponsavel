@@ -6,11 +6,17 @@ package br.com.ifba.lar_temporario.view;
 
 import br.com.ifba.lar_temporario.controller.LarTemporarioIController;
 import br.com.ifba.lar_temporario.entity.LarTemporario;
+import br.com.ifba.usuario.controller.UsuarioController;
+import br.com.ifba.usuario.entity.Usuario;
+import br.com.ifba.usuario.repository.UsuarioRepository;
 import jakarta.annotation.PostConstruct;
 import java.awt.HeadlessException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -30,20 +36,26 @@ public final class LarTemporarioView extends javax.swing.JFrame {
     @Autowired
     private LarTemporarioIController larTemporarioController;
     
+    @Autowired 
+    private UsuarioController usuarioController;
+    
+    
+    
     /**
      * Creates new form LarTemporarioListar
      */
     public LarTemporarioView() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);// Faz com que essa tela não feche as demais 
     }
     
     @PostConstruct
     public void init() {
-        carregarTabela();
+        carregarTabela();// Responsavel por carregar a tabela automaticamente ao entrar na tela
     }
     
-    public void carregarTabela() {
+    public void carregarTabela() { // Metodo responsavel por carregar a tabela automaticamente 
  
         try {
             List<LarTemporario> larTemporario = larTemporarioController.findAll();
@@ -60,7 +72,7 @@ public final class LarTemporarioView extends javax.swing.JFrame {
                     larTemporariolist.isDisponivel(),
                     larTemporariolist.getObservacoes(),
                     larTemporariolist.getQuantidadeMaxAnimais(),
-                    larTemporariolist.getPessoa().getId()
+                    larTemporariolist.getUsuario().getId(),
                 };
                 model.addRow(linha);
             }
@@ -93,14 +105,14 @@ public final class LarTemporarioView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Data_Cadastro", "Diponibilidade", "Observações", "Qtd max.Animais", "ID Adotante"
+                "ID", "Data_Cadastro", "Diponibilidade", "Observações", "Qtd max.Animais", "ID Adotante", "ID Animal"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -177,7 +189,6 @@ public final class LarTemporarioView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonAtualizarLarTemporarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarLarTemporarioActionPerformed
-        // TODO add your handling code here:
         int linhaSelecionada = jTableExibirLarTemporario.getSelectedRow();
 
         if (linhaSelecionada == -1) {
@@ -222,11 +233,9 @@ public final class LarTemporarioView extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao atualizar: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-        
     }//GEN-LAST:event_buttonAtualizarLarTemporarioActionPerformed
 
     private void buttonRemoverLarTemporarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRemoverLarTemporarioActionPerformed
-        // TODO add your handling code here:
         int linhaSelecionada = jTableExibirLarTemporario.getSelectedRow();
 
         if (linhaSelecionada == -1) {
@@ -255,7 +264,7 @@ public final class LarTemporarioView extends javax.swing.JFrame {
             return;
         }
 
-        try {
+        try { // Trata a excessao para o caso de excluir e der erro 
             LarTemporario lar = larTemporarioController.findById(idLarTemporario);
             if (lar == null) {
                 JOptionPane.showMessageDialog(this, "Lar não encontrado no banco.");
@@ -273,70 +282,70 @@ public final class LarTemporarioView extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonRemoverLarTemporarioActionPerformed
 
     private void buttonAdiconarLarTemporarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdiconarLarTemporarioActionPerformed
-        // TODO add your handling code here:
-        
-            JOptionPane.showMessageDialog(this, "Para adicionar um Lar temporario é nessesario que use o ID de um Adotante. "
-                    + "Caso não tenha cadastrado um adotante sua operação sera invalida, ´primeiro cadastre um adotante.´");
-            
+        // Mensagem inicial
+        JOptionPane.showMessageDialog(this, "Para adicionar um Lar temporario é necessário informar o ID de um Usuario (adotante). "
+                + "Caso não tenha cadastrado um adotante sua operação será inválida.");
 
-            JTextField campoPessoaId = new JTextField();
-            JTextField campoQuantidade = new JTextField();
-            JTextArea campoObservacoes = new JTextArea(5, 20);
-            JCheckBox checkDisponivel = new JCheckBox("Disponível para adoção", true);
-            JScrollPane scrollObservacoes = new JScrollPane(campoObservacoes);
+        JTextField campoUsuarioId = new JTextField();
+        JTextField campoQuantidade = new JTextField();
+        JTextArea campoObservacoes = new JTextArea(5, 20);
+        JCheckBox checkDisponivel = new JCheckBox("Disponível para adoção", true);
+        JScrollPane scrollObservacoes = new JScrollPane(campoObservacoes);
 
-            Object[] campos = {
-                "ID da Adotante:", campoPessoaId,
-                "Quantidade Máxima de Animais:", campoQuantidade,
-                "Observações:", scrollObservacoes,
-                checkDisponivel
-            };
+        Object[] campos = {
+            "ID do Usuario (Adotante):", campoUsuarioId,
+            "Quantidade Máxima de Animais:", campoQuantidade,
+            "Observações:", scrollObservacoes,
+            checkDisponivel
+        };
 
-            int opcao = JOptionPane.showConfirmDialog(
-                null,
-                campos,
-                "Adicionar Novo Lar Temporário",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.PLAIN_MESSAGE
-            );
+        int opcao = JOptionPane.showConfirmDialog(
+            null,
+            campos,
+            "Adicionar Novo Lar Temporário",
+            JOptionPane.OK_CANCEL_OPTION,
+            JOptionPane.PLAIN_MESSAGE
+        );
 
-            if (opcao == JOptionPane.OK_OPTION) {
-                try {
-                    // Validações e conversões
-                    Long pessoaId = Long.parseLong(campoPessoaId.getText().trim());
-                    int quantidade = Integer.parseInt(campoQuantidade.getText().trim());
-                    String observacoes = campoObservacoes.getText().trim();
-                    boolean disponivel = checkDisponivel.isSelected();
+        if (opcao == JOptionPane.OK_OPTION) {
+            try {
+                // Validações e conversões
+                Long usuarioId = Long.valueOf(campoUsuarioId.getText().trim());
+                int quantidade = Integer.parseInt(campoQuantidade.getText().trim());
+                String observacoes = campoObservacoes.getText().trim();
+                boolean disponivel = checkDisponivel.isSelected();
 
-                    // Busca Pessoa pelo ID IMPLEMENTAÇÃO FUTURA
-                    //Pessoa pessoa = larTemporarioController.findPessoaById(pessoaId); // você deve criar ou expor esse método no controller
-                    //if (pessoa == null) {
-                        //JOptionPane.showMessageDialog(this, "Pessoa com ID " + pessoaId + " não encontrada.", "Erro", JOptionPane.ERROR_MESSAGE);
-                        //return;
-                    //}
-
-                    // Criação do LarTemporario
-                    LarTemporario lar = new LarTemporario();
-                    //lar.setPessoa(pessoa);
-                    lar.setQuantidadeMaxAnimais(quantidade);
-                    lar.setObservacoes(observacoes);
-                    lar.setDisponivel(disponivel);
-                    lar.setDataCadastro(LocalDateTime.now());
-
-                    larTemporarioController.save(lar);
-
-                    JOptionPane.showMessageDialog(this, "Lar Temporário salvo com sucesso!");
-                    carregarTabela();
-
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(this, "ID e quantidade devem ser números válidos.", "Erro", JOptionPane.ERROR_MESSAGE);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Erro ao salvar Lar Temporário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                // TODO: O controller deve expor um método para buscar Usuario por id.
+                // Exemplo esperado: Usuario findUsuarioById(Long id)
+                Optional<Usuario> usuarioOpt = usuarioController.buscarUsuarioPorId(usuarioId);
+                if (usuarioOpt.isEmpty()) {
+                    JOptionPane.showMessageDialog(this,
+                        "Usuário com ID " + usuarioId + " não encontrado.",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
+                Usuario usuario = usuarioOpt.get();
+
+                // Criação do LarTemporario
+                LarTemporario lar = new LarTemporario();
+                lar.setUsuario(usuario);
+                lar.setQuantidadeMaxAnimais(quantidade);
+                lar.setObservacoes(observacoes);
+                lar.setDisponivel(disponivel);
+                lar.setDataCadastro(LocalDateTime.now());
+                lar.setAnimais(new ArrayList<>()); // inicialmente vazio
+
+                larTemporarioController.save(lar);
+
+                JOptionPane.showMessageDialog(this, "Lar Temporário salvo com sucesso!");
+                carregarTabela();
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "ID e quantidade devem ser números válidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Erro ao salvar Lar Temporário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
-
-
-        
     }//GEN-LAST:event_buttonAdiconarLarTemporarioActionPerformed
 
     private void jTextFildBuscarLarTemporarioPorIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFildBuscarLarTemporarioPorIDActionPerformed
@@ -373,7 +382,8 @@ public final class LarTemporarioView extends javax.swing.JFrame {
                     larTemporario.isDisponivel(),
                     larTemporario.getObservacoes(),
                     larTemporario.getQuantidadeMaxAnimais(),
-                    larTemporario.getPessoa().getId()
+                    larTemporario.getUsuario(),
+                    larTemporario.getAnimais()
                 };
                 model.addRow(linha);
             } else {

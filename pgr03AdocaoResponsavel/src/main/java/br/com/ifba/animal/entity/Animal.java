@@ -6,9 +6,13 @@
 package br.com.ifba.animal.entity;
 
 import br.com.ifba.infrastructure.entity.PersistenceEntity;
+import br.com.ifba.lar_temporario.entity.LarTemporario;
 import br.com.ifba.registro_interesse.entity.RegistroInteresse;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
@@ -59,6 +63,10 @@ public class Animal extends PersistenceEntity {
     @CreationTimestamp
     @Column(name = "data_cadastro", nullable = false, updatable = false)
     private LocalDateTime dataCadastro;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lar_temporario_id", referencedColumnName = "id")
+    private LarTemporario larTemporario;
     
     // Formatter para a data (dd/MM/yyyy HH:mm)
     private static final DateTimeFormatter DATE_FORMATTER = 
