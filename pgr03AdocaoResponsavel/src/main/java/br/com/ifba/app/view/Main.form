@@ -25,6 +25,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+<<<<<<< HEAD
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnJeffersonVacinas" min="-2" pref="244" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -34,6 +35,14 @@
                       <Component id="btnRodrigo" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnJefferson" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
                   </Group>
+=======
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btnInque" max="32767" attributes="0"/>
+                  <Component id="btnLarTemporarioLuan" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnRodrigo" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnJefferson" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
+                  <Component id="btnCampanhas" alignment="0" max="32767" attributes="0"/>
+>>>>>>> f50fc5b (feat(campanha): Implementa backend e tela de gerenciamento de campanhas)
               </Group>
               <EmptySpace pref="75" max="32767" attributes="0"/>
           </Group>
@@ -47,14 +56,18 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnLarTemporarioLuan" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnLuis" min="-2" max="-2" attributes="0"/>
+              <Component id="btnCampanhas" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnRodrigo" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnJefferson" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnJeffersonVacinas" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="27" max="32767" attributes="0"/>
+=======
+              <EmptySpace pref="68" max="32767" attributes="0"/>
+>>>>>>> f50fc5b (feat(campanha): Implementa backend e tela de gerenciamento de campanhas)
           </Group>
       </Group>
     </DimensionLayout>
@@ -73,11 +86,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLarTemporarioLuanActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnLuis">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Luis"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btnRodrigo">
       <Properties>
         <Property name="text" type="java.lang.String" value="Gerenciamento Animais (Rodrigo)"/>
@@ -91,12 +99,21 @@
         <Property name="text" type="java.lang.String" value="Gest&#xe3;o de Usu&#xe1;rios (Jefferson)"/>
       </Properties>
     </Component>
+<<<<<<< HEAD
     <Component class="javax.swing.JButton" name="btnJeffersonVacinas">
       <Properties>
         <Property name="text" type="java.lang.String" value="Agenda de Vacinas (Jefferson)"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnJeffersonVacinasActionPerformed"/>
+=======
+    <Component class="javax.swing.JButton" name="btnCampanhas">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Campanhas (Luis)"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCampanhasActionPerformed"/>
+>>>>>>> f50fc5b (feat(campanha): Implementa backend e tela de gerenciamento de campanhas)
       </Events>
     </Component>
   </SubComponents>

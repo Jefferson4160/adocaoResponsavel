@@ -12,6 +12,8 @@ import br.com.ifba.gerenciamentoUsuarios.view.GerenciamentoUsuariosTela01;
 import br.com.ifba.lar_temporario.view.LarTemporarioView;
 import br.com.ifba.tela.util.ApplicationContextProvider;
 
+import br.com.ifba.campanha.view.TelaCampanha;
+
 import jakarta.annotation.PostConstruct;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +29,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Main extends javax.swing.JFrame {
+    
+    @Autowired
+    private TelaCampanha telaCampanhas;
     @Autowired 
     private UsuarioIController usuarioController;
     @Lazy
@@ -60,11 +65,6 @@ public class Main extends javax.swing.JFrame {
                     .getBean(LarTemporarioView.class);
 
                 tela.setVisible(true);
-            }
-        });
-        btnLuis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLuisActionPerformed(evt);
             }
         });
         btnRodrigo.addActionListener(new java.awt.event.ActionListener() {
@@ -136,10 +136,13 @@ public class Main extends javax.swing.JFrame {
 
         btnInque = new javax.swing.JButton();
         btnLarTemporarioLuan = new javax.swing.JButton();
-        btnLuis = new javax.swing.JButton();
         btnRodrigo = new javax.swing.JButton();
         btnJefferson = new javax.swing.JButton();
+<<<<<<< HEAD
         btnJeffersonVacinas = new javax.swing.JButton();
+=======
+        btnCampanhas = new javax.swing.JButton();
+>>>>>>> f50fc5b (feat(campanha): Implementa backend e tela de gerenciamento de campanhas)
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,8 +155,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnLuis.setText("Luis");
-
         btnRodrigo.setText("Gerenciamento Animais (Rodrigo)");
         btnRodrigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,10 +164,17 @@ public class Main extends javax.swing.JFrame {
 
         btnJefferson.setText("Gestão de Usuários (Jefferson)");
 
+<<<<<<< HEAD
         btnJeffersonVacinas.setText("Agenda de Vacinas (Jefferson)");
         btnJeffersonVacinas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnJeffersonVacinasActionPerformed(evt);
+=======
+        btnCampanhas.setText("Campanhas (Luis)");
+        btnCampanhas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCampanhasActionPerformed(evt);
+>>>>>>> f50fc5b (feat(campanha): Implementa backend e tela de gerenciamento de campanhas)
             }
         });
 
@@ -176,6 +184,7 @@ public class Main extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(75, 75, 75)
+<<<<<<< HEAD
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnJeffersonVacinas, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -184,6 +193,14 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(btnLuis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRodrigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnJefferson, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
+=======
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnInque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLarTemporarioLuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRodrigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnJefferson, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCampanhas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+>>>>>>> f50fc5b (feat(campanha): Implementa backend e tela de gerenciamento de campanhas)
                 .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -194,14 +211,18 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLarTemporarioLuan)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLuis)
+                .addComponent(btnCampanhas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRodrigo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnJefferson)
+<<<<<<< HEAD
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnJeffersonVacinas)
                 .addContainerGap(27, Short.MAX_VALUE))
+=======
+                .addContainerGap(68, Short.MAX_VALUE))
+>>>>>>> f50fc5b (feat(campanha): Implementa backend e tela de gerenciamento de campanhas)
         );
 
         pack();
@@ -225,15 +246,18 @@ public class Main extends javax.swing.JFrame {
     private void btnJeffersonVacinasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJeffersonVacinasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnJeffersonVacinasActionPerformed
+    private void btnCampanhasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCampanhasActionPerformed
+        telaCampanhas.setVisible(true);
+    }//GEN-LAST:event_btnCampanhasActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCampanhas;
     private javax.swing.JButton btnInque;
     private javax.swing.JButton btnJefferson;
     private javax.swing.JButton btnJeffersonVacinas;
     private javax.swing.JButton btnLarTemporarioLuan;
-    private javax.swing.JButton btnLuis;
     private javax.swing.JButton btnRodrigo;
     // End of variables declaration//GEN-END:variables
 }
